@@ -1,0 +1,72 @@
+\section{Xen\textsuperscript{\textregistered}}
+\xen je open source VMM (\textit{\textbf{V}irtual \textbf{M}achine \textbf{M}onitor}) též zvaný jako hypervizor, podporující jak 32 bitový tak i 64 bitový x86 procesory. Je jedním z nejlepších a nejznámnějších open source řešení co se serverové virtualizace týče. Spousta profesionálních řešení s komerční podporou je vystavěna právě na základě Xen hypervizoru. Xen hypervizor běží přímo na fyzickém stroji (bare-metal) a umožňuje spouštět libovolný počet virtualizovaných strojů, které dosahují skoro stejného výkonu jako by se jednalo o nativní stroje. V následujícím textu se proto seznámíme s tímto virtualizačním řešením podrobněji.
+
+\subsection{Historie}
+Hypervizor \xen byl původně vyvinut jako součást univerzitního projektu XenoServers na Univerzitě v Cambridge. Kde hlavním cílem projektu bylo vyvinout veřejné rozhraní pro distribuovaný výpočet, jenž by bylo dostupné pro širokou veřejnost. Prvního zveřejnění se Xen hypervizor dočkal roku 2003. Jednalo se o dokument "`Xen and The Art of Virtualization"' zveřejněný na vědeckém zasedání o pricipech operačních systémů (\emph{Symposium on Operating Systems Principles}). V tomto dokukmetu je popsán hypervizor a jeho přístup řešení problému virtualizace na x86 architektuře.
+
+Ve stejném roce vyšlo i první vydání Xen hypervizoru (verze 1.0), které bylo volně ke stažení. Od té doby se o Xen hypervizor začalo zajímat spousty firem, které použili tento hypervizor jako základ svých virtualizačních řešení. Xen byl později koupený firmou Citrix, která jej využívá pro své produkty XenServer. Samotný hypervizor však stále zůstal open source a jeho správu má na starost nadace XenSource založená jedním z původních vývojářů Ianem Prattem. Open source hypervizor se nachází na stránkách \texttt{http://www.xen.org/ }
+
+\subsection{Architektura a způsob virtualizace}
+\xen hypervizor podporuje primárně dva způsoby virtualizace stroje. První a původní je paravirtualizace, což je princip při kterém nedochází k emulaci jednotlivých komponent počítače. Namísto toho musí mít jádro hostovaného operačního systému (DomainU host) speciální ovladače pro univerzální rozhraní zařízení. Při přístupu na toto rozhraní se vlastně přistupuje nepřímo k reálnému HW. Zjednodušeně řečeno ovladač rozhraní přistupuje k ovladači (multiplexoru) v hypervizoru, který zajišťuje sdílení reálného HW mezi více hosty. Hypervizor pak následně přistupuje k reálnému HW pomocí ovladačů implementovaných v Domain0 hostu.
+
+V předchozím odstavci jsme použil zatím nevysvětlené pojmy DomainU a Domain0 (zkráceně Dom0 a DomU). Samotný \xen hypervizor sám o sobě nemá žádné aplikační rozhraní, přes který by se dal ovládat a konfigurovat. K tomu je zapotřebí právě Dom0 host, což je v podstatě základní operační systém, který obsahuje ovladače k reálnému požitému hardware, nástroje pro práci s dalšími virtuálními hosty (DomU hosti) (vytváření, modifikování, spouštění\dots). Většinou je tímto základním Dom0 hostem některá z distribuc linuxu. Dalšími podporovanými jsou některé operační systémy Unix a BSD distribuce jako NetBSD a OpenBSD.
+
+Dom0 host s \xen hypervizor je v podstatě minimální možná použitelná virtualizační platforma, jelikož Dom0 host obsahuje plnohodnotný operační systém, na kterém mohou bežet libovolné služby a aplikace. Tato konfigurace však nemá příliš význam, proto se jako užitečné minimum udává konfigurace s alespoň s jedním DomU hostem. Jako DomU host se označuje jakýkoliv další virtuální host bežící na \xen hypervizoru, který není Dom0 hostem. Dom0 host běží vždy jen jeden, kdežto DomU hostů může běžet teoreticky neomezeně.
+
+Jak už jsem naznačil DomU host může běžet buď v paravirtualizováném módu nebo v HVM (\emph{\textbf{H}ardware \textbf{V}irtual \textbf{M}achine}) módu. HVM mód se od paravirtualizovaného liší tím, že již není třeba modifikovat jádro operačního systému. A virtuální host se chová zcela stejně jako by se jednalo o reálný fyzický stroj. Toto je možné jen u novějších procesorů, které mají HW podporu virtualizace. Drobnou nevýhodou je nutnost emulace, některých HW komponent virtuálního stroje. Jelikož aby se virtuální stroj choval zcela jako fyzický a operační systém nepoznal rozdíl, tak je potřeba emulovat BIOS a základní HW. Existují však i způsoby jak může takto virtualizovaný host poznat, že je virtualizován a využívat zařízení podobně jak tomu je u paravirtualizace. Toho se zejména využívá u paměťových zařízení, síťového adaptéru a PCI. Jedním z pozitivních vlastností tohoto přístupu je nižší režie. Dalším rozdílem HVM oproti paravirtualizaci je schopnost spouštět hosty i s jinačí architekturou. Například v paravirtuaůizovaném módu, pokud je Dom0 host 32bit tak i všichni DomU hosti musí bít 32bit, a nejen to dokce záleží i na dalších parametrech. Pokud by Dom0 host měl jádro s podporou PAE (\emph{\textbf{P}hysical \textbf{A}ddress \textbf{E}xtension}), tak to samé musí platit pro DomU hosty. U HVM toto neplatí, zde platí obecně pravidlo, že DomU hosti mohou být technologicky odlišní, ale nesmí být na vyšší úrovni než Dom0 host. Pokud by tedy Dom0 měl 64bit architektutu, tak DomU může být 64bit, 32bit s PAE nebo 32bit host.
+
+\subsubsection{Jaký mód tedy zvolit?}
+Obecně se dá říct, že pokud máte stroj s procesorem podporující hardwarovou virtualizaci, tak je lepší použít novější HVM mód. V případě že máte procesor bez podpory virtualizace, tak je asi nejlepším řešením paravirtualizace. Pokud dokonce máte jen 32 bitový procesor, tak je určitě dobré použít jádra s podporou PAE. To vám umožní adresovat více než 4GB operační paměti.
+
+\subsection{Výhody a nevýhody}
+\subsubsection{Výhody}
+\begin{itemize}
+  \item možnost virtualizace i na strojích bez podpory hardwarové virtualizace
+  \item problematické instrukce řešeny již během překladu a né v době běhu $\Rightarrow$ lepší výkon
+  \item hodně rozšířené, velká podpora jak komunity tak existují i komerční řešení
+  \item velké množství kvalitní literatury
+  \item možnost plné virtualizace v případě podpory hardwarem
+\end{itemize}
+
+\subsubsection{Nevýhody}
+\begin{itemize}
+  \item v případě paravirtualizovaného hosta je potřeba mít modifikované jádro
+  \item hypervizor není přímo součástí jádra operačního systému
+\end{itemize}
+
+\section{Kernel-based Virtual Machine}
+KVM (\emph{\textbf{K}ernel-based \textbf{V}irtual \textbf{M}achine}) je dalším výkonným open source virtualizačním řešením, které je primárně vhodné pro virtualizaci serverů. Jedná se relativně o mladé řešení, které se oproti \xen hypervisoru, ten se primárně soustředil na paravirtualizaci, dá spíše označit jako rešení podporující plnou virtualizaci. Ačkoliv si později ukážeme, že i v KVM se v určitých situacích využívá paravirtualizace. Důležitým rysem KVM je jeho závislost na HW podpoře virtualizace, bez které nelze KVM používat. Toto naštěstí v dnešní době není zas tak velký nedostatek a na většině dnešních strojů by KVM technologie měla být schopna fungovat. Původně byla podporována jen x86 architektura, ale během posledních let začala vznikat i podpora pro další architektury (powerpc, IA64, ARM \dots). Původním operačním systémem, na kterém bylo možno KVM provozovat byl operační systém s linuxovým jádrem. Dnes však existují i porty pro další jádra operačních systému jako je FreeBSD a Illumos.
+
+\subsection{Historie}
+Jak už jsem se zmínil KVM je docela mladou technologií. Do jádra linuxu se dostala teprve začátkem roku 2007 (jádro verze 2.6.20). KVM vyvinula docela neznámá firma Qumranet, a začlenění jejího kódu do jádra 2.6.20 proběhlo pro některé až velmi jednoduše. Důvodem pravděpodobně byl fakt, že si Linus Torvalds uvědomoval potřebu nativní podpory virtualizace v jádře a KVM se zdálo jako ideální řešení. V roce 2008 byla firma Qumranet odkoupena již mnohem známější firmou RedHat, Inc. Ta je nadále hlavním přispěvovatelem co se kódu KVM týče a sama na KVM staví své nové komerční virtualizační řešení. Dříve RedHat stavěl právě na již zmiňovaném \xen hypervizoru. 
+
+\subsection{Jak to funguje}
+Ačkoliv KVM a \xen hypervizor dělají v podstatě to samé, tak každý z nich to dělá mírně odlišným způsobem. KVM sám o sobě totiž není hypervizor, jelikož neobsahuje žádné ovladače ani plánovač procesů atd. Jedná se v podstatě jen o modul jádra, který vytváří rozhraní pro vytváření virtuálních hostů uvnitř jádra, jako jaderné procesy. Dalo by se tedy říct, že roli hypervizoru u KVM hraje samotné jádro. Což má hned několik výhod, jako například, že není potřeba implementovat znovu plánovač procesů, ovladače a další součásti, které by jinak hypervizor musel mít. Využívají se totiž přímo algoritmy a ovladače v jádře, to má za následek přímočarejší přístup a následné lepší využití fyzických prostředků stroje.
+
+KVM vyžaduje hardwarovou podporu virtualizaci, což v dnešní době obsahují jak procesory firmy Intel tak i procesory od AMD. Naneštěstí oba z těchto výrobců mají vlastní implementaci a sadu instrukcí, která je odlišná od konkurenčního řešení. Tento problém je v KVM vyřešen rozdělením do více jaderných modulů. Základní \texttt{kvm} modul obsahuje jen ty části, které se napříč oběma procesory neliší a jsou obecné. Na procesoru závislé úseky kódu jsou v jednotlivých vlastních modulech. U AMD procesorů je to modul s názevem \texttt{kvm-amd} a u procesorů Intel je to modul \texttt{kvm-intel}. Po načtení kvm a \texttt{kvm-intel} nebo \texttt{kvm-amd} modulů, se vytvoří zařízení \texttt{/dev/kvm}.
+Pomocí tohoto zařízení skrze volání různých \texttt{ioctl()} příkazů  probíhá veškeré ovladání (vytváření, spouštění a mazaní hsotů atd.) KVM virtualizace z uživatelského prostoru.
+
+Důležitou součástí, bez které by nám KVM virtualizace nefungovala, je upravená verze emulátoru QEMU. Tento upravený emulátor poskytuje virtuálním hostům emulované komponenty jako je pevný disk, síťový adaptér, grafický akcelerátor atd. Na první pohled není rozdíl mezi použitím pouze QEMU, nebo KVM. Rozdíl je patrný až ve výkonu. Jelikož samotný QEMU pouze emuluje celý počítač a umožňuje na něm spouštět libovolný OS. Ale zde se jedná pouze o kompletní překlad všesch instrukcí. To znamená že veškeré činnosti provedené v takto emulovaném hostu jsou překládány a emulovány a tudíž se nespouští přímo na fyzickém procesoru. To je samozřejmě velmi pomalé hlavně co se paměťových operací týče. Teprve až kombinace QEMU a KVM přináší požadovaný výkon a dá se zde mluvit přímo o virtualizaci. Prozatím, jak jsem již psal, je třeba modifikovaná verze QEMU, která umí spolupracovat s KVM. Do budoucna je však snaha začlenit veškeré potřebné změny přímo do zdrojového kódu oficiální verze QEMU. Což by mělo usnadit a urychlit vývoj.
+
+Z výše uvedeného textu vyplývá, že KVM virtualizace využívá plnou emulaci. To je částěčně pravda jelikož tomu tak může být. Emulace sebou však nese režii navíc, což je nežádoucí. Proto bylo vymyšleno rozhraní Virtio, které má za úkol tento problém řešit. Jedná se vlastně o podobné řešení jaké jsem již zmiňoval u \xen hypervizoru. Místo toho, aby byli veškeré komponenty plně emulovány, tak pro ty nejnáročnější na výkon (disky, GPU, síťový adaptér\dots), byli napsány speciální ovladače využívající rozhraní virtio, což je vlastně paravirtualizované rozhraní. Tudíž se operace nemusí emulovat, ale jsou pomocí virtio ovladačů přenášeny přímo na reálný hardware hostitele.
+
+\subsection{Výhody a nevýhody}
+\subsubsection{Výhody}
+\begin{itemize}
+  \item přímo součástí jádra operačního systému $\Rightarrow$ netřeba doinstalovávat
+  \item hypervizorem je vlastně samotné jádro, to přináší menší režii a použití ověřených algoritmů a ovladačů
+  \item využití již existujícíh ověřených a funkčních nástrojů (QEMU)
+  \item podpora paravitualizace (Virtio)
+  \item dělá jen jednu věc a pořádně
+  \item rychlý vývoj
+\end{itemize}
+\subsubsection{Nevýhody}
+\begin{itemize}
+  \item poměrně nová technologie o které není pořádná literatura
+  \item podpora pouze strojů s HW virtualizací (dnes už skoro irelevantní)
+  %\item Virtio ovladače zatím dostupné pouze v Linuxu a Windows
+\end{itemize}
+\section{User Mode Linux}
+\section{VirtualBox}
+\section{LXC}
+\section{Linux-VServer}
