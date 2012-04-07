@@ -73,7 +73,9 @@ Jedná se totiž o port Linuxu na Linux, a to ve stejném smyslu jako porty Linu
 
 Každý UML virtuální stroj tedy běží jako samostatný proces. To znamená, že všechny virtuální stroje jsou izolované a pád, kteréhokoliv z nich neovlivní jak hostitele, tak ani další virtuální hosty. Další výhodou je velmi snadné a rychlé nastartování a vypnutí hosta. Díky tomu jake je UML navržen, je možné hosty během jejich běhu snadno rekonfigurovat a přidělovat jim systémové prostředky. Dokonce je možné jim přidělit více RAM nebo i procesorů, než má reálně hostitel. Toho se zejména využívá při testování softwaru, u kterého potřebujem vyzkoušet funkčnost na hardwaru, který nemáme k dispozici.
 \subsection{Historie}
-Původním autorem UML je Jeff Dike, který začal na UML pracovat počátkem roku 1999. První veřejné oznámení se oběvilo v mailové konferenci počátkem června. Následujících několik let bylo UML vyvíjeno primárně jen Jeffem a to mimo hlavní vývojovou větev. To samozřejmně neslo několik nevýhod. Pokaždé když došlo, k některým změnám v kódu jádra. Musel Jeff tyto změny dohledávat v historii a upravovat svůj kód. Ačkoliv se z toho stala rutina, i tak si Jeff uvědomoval, že takto zabitý čas by se dal využít lépe. A to byl jeden z důvodů, proč se začal snažit protlačit svůj kód do hlavní větve. Druhým důvodem byla snaha více rozšířit UML mezi ostatní lidi.
+Původním autorem UML je Jeff Dike, který začal na UML pracovat počátkem roku 1999. První veřejné oznámení se oběvilo v mailové konferenci počátkem června. Následujících několik let bylo UML vyvíjeno primárně jen Jeffem a to mimo hlavní vývojovou větev.
+
+To samozřejmně neslo několik nevýhod. Pokaždé když došlo, k některým změnám v kódu jádra. Musel Jeff tyto změny dohledávat v historii a upravovat svůj kód. Ačkoliv se z toho stala rutina, i tak si Jeff uvědomoval, že takto zabitý čas by se dal využít lépe. A to byl jeden z důvodů, proč se začal snažit protlačit svůj kód do hlavní větve. Druhým důvodem byla snaha více rozšířit UML mezi ostatní lidi.
 
 Jeho snaha se nakonec vyplatila a 12. září 2002 byl UML začleněn do vývojové větve 2.5.34. Naneštěstí se později ukázalo, že není snadné přídávat nové funkce a opravy do hlavní větve jádra. Jelikož většina patchů, které Jeff poslal nebyla zařazena. A tak začal nacvhíli vyvíjet UML mimo hlavní větev. A to až do doby, kdy si jeden s vývojářů jádra těchto patchů všiml a nechal je zařadit do vývojové větve Andrew Mortona (Andrew Morton byl druhý ve vedení hned po Linusu Torvaldsovi). Zde UML zůstalo po určitou dobu a získalo si spoustu příznivců. Takže se nakonec opět dostalo do hlavní větve jádra (2.6.9) a od té doby je jeho součástí.
 
@@ -82,7 +84,7 @@ Prvních 5 let Jeff pracoval na UML jen ve svém volném čase a živil se jako 
 \subsection{Výhody a nevýhody}
 \subsubsection{Výhody}
 \begin{itemize}
-  \item každý virtuální stroj běží jako samostatný proces $\rightarrow$ izolace
+  \item každý virtuální stroj běží jako samostatný proces $\Rightarrow$ izolace
   \item možnost přidělovat více prostředků než je reálně dostupné
   \item přímo součástí jádra
   \item rychlé zapínání a vypínaní virtuálních hostů
@@ -97,6 +99,36 @@ Prvních 5 let Jeff pracoval na UML jen ve svém volném čase a živil se jako 
 \end{itemize}
 
 \section{VirtualBox}
+Oracle VM VirtualBox je multiplatformní virtualizační software, který je v současnosti vyvíjen společností Oracle Corporation. VirtualBox je samostatná aplikace, která ke svému běho potřebuje spuštěný operační systém. Tím může být jeden ze čtveřice operačních systémů (Microsoft Windows, Mac OSX, Linux nebo Solaris). Krom zmíněných OS, zde existuje i snaha portovat VirtualBox na platformu FreeBSD. Během několika posledních let se z VirtualBoxu stal jeden z nejpopulárnějších virtualizačních softwarů. To dokazují i ankety z roku 2010, kde VirtualBox získal více než 50\,\% hlasů. VirtualBoxu se daří především na pracovních a domácích stanicích, a to hlavně díky svému jednoduchému grafickému rozhraní a dobré uživatelské dokumentaci.
 
+VirtualBox se řadí mezi virtualizační software pdoporující plnou virtualizaci, a umožňuje spouštet nemodifikované hosty. Krom toho umožňuje své hosty spouštět ve dvou režimech. První režim nevyžaduje hardwarovou podporu virtualizace a problém privilegovaných instrukcí řeší pomocí nahrazování za běhu. K tomuto účelu slouží scanner instrukcí, který analyzuje volané instrukce a odchytává ty, které nemohli být spuštěny v daném ochraném režimu procesoru. Odchycené instrukce následně nahrazuje jejich bezpečnými variantami, které má předkompilované ve svém hypervizoru. Tento režim dosahuje díky dalším pokročilím technologiím celekm dobrého výkonu. Ale i přesto je zde režie okolo 20\,\%. Proto existuje i druhý režim využívající HW podporu virtualizace. V tomto režimu všechy hostované systémy zůstávají běžet v privilegovaném režimu a je jim udělen vlastní virtuální pamětový prostor. Díky tomu, že zde nedochází ke skenování a nahrazování prvilegovaných operací je režie mnohem menší.
+
+Stejně jako KVM podporuje Virtualbox v novějších verzích paravirtualizované Virtio rozhraní. To přináší další zvýšení výkonu v oblasti sítí a paměťových operací. Samozřejmě zde zůstává i podpora méně výkonných emulovaných zařízení, která se mohou hodit například z důvodů kompatibility se staršími hosty. Velkou výhodou je i podpora diskových formátů konkurenčních řešení, takže je možné pustit virtuální hosty, kteří byli původně instalovány například v programech od firmy VMWare (VMDK diskový formát) nebo Microsoft Virtual PC (VHD formát).
+
+\subsection{Historie}
+
+Vývoj VirtualBoxu započala německá firma InnoTek GmbH na začátku roku 2007, kdy vyšla první volně dostupná verze VirtualBoxu (1.3.2). Firma začala na produktu pracovat již dříve, ale tenkrát se jednalo o uzavřené řešení. K otevření došlo kvůli dodržení licenčních podmínek, jelikož produkt využívá část kódu z QEMU, který je vydáván po GNU GPL licencí.
+
+Už tenkrát se jednalo o velmi zajímavý software, který zvládal většinu funkcí, které by se od virtualizačního software čekali. O rok později proběhla akvizice firmy Innotek firmou Sun Microsystems, která byla zase následně koupena firmou Oracle Corporation.
+Během prvního roku vyšlo hned několik zajímavých verzí, které postupně přidávali podporu pro nové hosty a technologie. Například ve verzi 1.4.0 vydané 06.06.2007 přibila podpora AMD64 a Mac OS X hostitelů. Podpora Windows 64bit hostitelů přibila v následující verzi (1.5.0). Krom podpory hostitelů přibili i funkce jako podpora USB 2.0 nebo podpora PulseAudio backendu. Další verze byli již pod záštitou společnosti Sun Microsystems. Zde asi nejzajímavější verze byla 2.0, kde přibyla podpora pro 64bitové hosty (jen na 64bitových hostitelech) a zvýšení výkonu u SATA řadičů v případě raw přístupu k zařízení (podpora technologie NCQ). Poslední verzí vydanou ještě pod záštitou Sunu byla verze 2.2.0. V této verzi již přibyla podpora pro 3D akceleraci a Host-only network mode.
+
+Počínaje verzí 3.0 se již jednalo o produkt vyvíjený firmou Oracle Corporation, jelikož v pondělí 20. dubna 2009 byla společnost Sun Microsystems odkoupena firmou Oracle za 7,4 miliardy amerických dolarů. Zde stojí za zmíňku verze 3.1.0, jenž přinesla podporu živé migrace hostů, 2D akceleraci pro windows hosty a paravirtualizovaný síťový adaptér (virtio-net). V posledních verzí pak přibyla podpora pro klonování hostů, experimentální podpora Windows Aero a podporu více monitorů na linuxových hostech.
+
+\subsection{Výhody a nevýhody}
+\subsubsection{Výhody}
+\begin{itemize}
+  \item podpora široké škály hostovaných operačních systémů 
+  \item podpora paravirtualizace zařízení (virtio)
+  \item HW podpora virtualizce
+  \item umožňuje běh nemodifikovaných hostů
+  \item velmi snadné ovládání a dostupnost kvalitní dokumentace
+  \item podpora více opračních systému jako hostitelů
+  \item velmi snadná instalace
+\end{itemize}
+\subsubsection{Nevýhody}
+\begin{itemize}
+  \item některé užitečné vlastnosti dostupné jen v non-free doplňcích
+  \item podpora čistě x86 architektury
+\end{itemize}
 \section{LXC}
 \section{Linux-VServer}
