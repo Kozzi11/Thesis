@@ -67,6 +67,36 @@ Z výše uvedeného textu vyplývá, že KVM virtualizace využívá plnou emula
   %\item Virtio ovladače zatím dostupné pouze v Linuxu a Windows
 \end{itemize}
 \section{User Mode Linux}
+\emph{\textbf{U}ser \textbf{M}ode \textbf{L}inux} (dále jen UML) je dalším zajímavým open source virtualizačním řešením. UML se od předchozích zmiňovaných technologí mírně liší. Dal by se totiž popsat spíše jako virtuální operační systém, než přímo jako virtuální stroj.
+
+Jedná se totiž o port Linuxu na Linux, a to ve stejném smyslu jako porty Linuxu na jiné architektury procesorů (ARM, MIPS \dots). Pro lepší pochopení předchozí věty uvedu příklad. Pokud na svém stroji s x86\_64 procesorem spouštím Linux, tak jádro Linuxu volá instrukce mého procesoru (instrukční sadu x86\_64). V případě spouštění UML se jedná v podstatě o totéž. S tím rozdílem, že při spouštění UML se nevolají instrukce procesoru, ale jaderná volání. Pokud by chom tedy nahlédly do zdrojových kódů jádra Linuxu, tak v adresáři \texttt{arch}, kde jsou uloženy podporované architektury procesorů, najdem kromě adresářů \texttt{x86\_64}, \texttt{arm}~\dots, také adresář s názvem \texttt{um}.
+
+Každý UML virtuální stroj tedy běží jako samostatný proces. To znamená, že všechny virtuální stroje jsou izolované a pád, kteréhokoliv z nich neovlivní jak hostitele, tak ani další virtuální hosty. Další výhodou je velmi snadné a rychlé nastartování a vypnutí hosta. Díky tomu jake je UML navržen, je možné hosty během jejich běhu snadno rekonfigurovat a přidělovat jim systémové prostředky. Dokonce je možné jim přidělit více RAM nebo i procesorů, než má reálně hostitel. Toho se zejména využívá při testování softwaru, u kterého potřebujem vyzkoušet funkčnost na hardwaru, který nemáme k dispozici.
+\subsection{Historie}
+Původním autorem UML je Jeff Dike, který začal na UML pracovat počátkem roku 1999. První veřejné oznámení se oběvilo v mailové konferenci počátkem června. Následujících několik let bylo UML vyvíjeno primárně jen Jeffem a to mimo hlavní vývojovou větev. To samozřejmně neslo několik nevýhod. Pokaždé když došlo, k některým změnám v kódu jádra. Musel Jeff tyto změny dohledávat v historii a upravovat svůj kód. Ačkoliv se z toho stala rutina, i tak si Jeff uvědomoval, že takto zabitý čas by se dal využít lépe. A to byl jeden z důvodů, proč se začal snažit protlačit svůj kód do hlavní větve. Druhým důvodem byla snaha více rozšířit UML mezi ostatní lidi.
+
+Jeho snaha se nakonec vyplatila a 12. září 2002 byl UML začleněn do vývojové větve 2.5.34. Naneštěstí se později ukázalo, že není snadné přídávat nové funkce a opravy do hlavní větve jádra. Jelikož většina patchů, které Jeff poslal nebyla zařazena. A tak začal nacvhíli vyvíjet UML mimo hlavní větev. A to až do doby, kdy si jeden s vývojářů jádra těchto patchů všiml a nechal je zařadit do vývojové větve Andrew Mortona (Andrew Morton byl druhý ve vedení hned po Linusu Torvaldsovi). Zde UML zůstalo po určitou dobu a získalo si spoustu příznivců. Takže se nakonec opět dostalo do hlavní větve jádra (2.6.9) a od té doby je jeho součástí.
+
+Prvních 5 let Jeff pracoval na UML jen ve svém volném čase a živil se jako IT konzultant. To se změnilo v roce 2004, kdy dostal pracovní nabídku od firem Intel a RedHat, Inc. Obě firmy mu nabídli možnost nadále pokračovat ve vývoji UML a Jeff nakonec začal pracovat pro Intel, kde se od roku 2004 nadále věnuje vývoji UML.
+
+\subsection{Výhody a nevýhody}
+\subsubsection{Výhody}
+\begin{itemize}
+  \item každý virtuální stroj běží jako samostatný proces $\rightarrow$ izolace
+  \item možnost přidělovat více prostředků než je reálně dostupné
+  \item přímo součástí jádra
+  \item rychlé zapínání a vypínaní virtuálních hostů
+\end{itemize}
+
+\subsubsection{Nevýhody}
+\begin{itemize}
+  \item nejedná se o plnohodnotnou virtualizaci, což má určitá omezení
+  \item nemožnost použití nemodifikovaných hostů
+  \item podpora pouze Linux hostů
+  \item né moc skvělý výkon, zatím chybí podpora HW virtualizace
+\end{itemize}
+
 \section{VirtualBox}
+
 \section{LXC}
 \section{Linux-VServer}
