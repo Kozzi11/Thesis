@@ -1,0 +1,74 @@
+V následující kapitole si popíšeme něco málo o sestavě, která byla pro účely testování a srovnáváni výkonu virtualizačních nástrojů použita. Krom hardwarové výbavy testovacího stroje, což je základní minimum, které by mělo být uvedeno v každé práci zabývající se testováním výkonu určitých softwarových produktů, si také uvedeme operační systém a jeho přesnou verzi. Pro zvýšení vypovídající hodnoty následujících testů, zde uvedu i přesné verze jednotlivývh nástrojů použitých při testování.
+
+\section{Testovací sestava}
+\subsection{Základní deska}
+Základem celého počítače je deska 880GMH/U3S3 od firmy ASRock. Důvodem pro její zvolení byla údajná podpora nejnovější rodiny AMD procesorů Bulldozer a také její podpora taktování. Během osazení této desky jednim z nových procesorů, se ukázalo, že podporu bulldozerů sice deska má. Bohužel až s nejnovější verzí BIOSu. Tu samozřejmě většina prodávaných kusů neměla. Bylo tedy nutno použít starší AMD procesor se socketem AM2+ a vyšší. A následně provést update BIOSu. Poté už vše fungovalo v pořádku.
+\subsubsection{Přehled kompletních parametrů}
+\begin{itemize}
+  \item Podpora pro AM3+ procesory, až 8 jader
+  \item 100\,\% pevných kondezátorů (delší životnost) 
+  \item Podpora pro Dual Channel DDR3 2000(OC)
+  \item Podpora ATI™ Hybrid CrossFireX™
+  \item Integrovaná GPU AMD Radeon HD 4250 graphics, DX10.1 class iGPU, Shader Model 4.1
+  \item Video výstupy : D-Sub, DVI-D a HDMI
+  \item 2 x USB 3.0, 2 x SATA3, C.C.R. (Combo Cooler Retention Module)
+  \item Podpora dalších technologií: AXTU, Graphical UEFI, Instant Boot, Instant Flash, APP Charger, SmartView
+\end{itemize}
+
+\subsection{Procesor}
+Jak už jsme se výšše zmínil, použit byl procesor od firmy AMD se socketem AM3+ . Jednalo se o jeden z prvních modelů nové rodiny Bulldozer. Přesné označení procesoru je AMD FX-4100. Jedná se o procesor se čtyřmi jádry, kde každý z nich je v základním nastavení taktován na frekvenci 3,6 GHz (respektive 3,7 -- 3,8 v Turbo módu). Díky odemknutému násobiči je tento procesor přímo předurčen pro přetaktování. V době testů byl však ponechán na jeho základních frekvencí s vypnutým turbo boostem.
+
+\subsubsection{Podrobné parametry}
+\begin{itemize}
+  \item Socket: AM3+
+  \item L2 cache: 4 MB
+  \item Frekvence: 3600 MHz
+  \item Typ: AMD FX
+  \item Model: FX-4100
+  \item Počet jader: 4
+  \item Operační módy: 32-bit a 64-bit
+  \item L3 cache: 8 MB
+  \item Výrobní proces: 32\,nm
+  \item TDP: 95\,W
+\end{itemize}
+
+\subsection{Disky}
+Počítačová sestava je vybavena dvěma pevnými disky jedním rychlým systémovým SSD diskem Verbatim o kapacitě 128\,GB, a druhým datovým SATA-II diskem Samsung o kapacitě 1\,GB.
+\subsubsection{Parametry systémového disku}
+\begin{itemize}
+  \item Výrobce: Verbatim
+  \item Model: SSD Black Edition
+  \item Kapacita: 128\,GB
+  \item Rozhraní: Serial ATA II
+  \item Průměrný vyhledávací čas: 0.1\,ms
+  \item Rychlost čtení: 270\,MB/s
+  \item Rychlost zápisu: 225\,MB/s
+  \item Rychlost přenosu dat: 3\,Gbit/s
+  \item Speciální funkce: podpora TRIM a NCQ
+\end{itemize}
+
+\subsubsection{Parametry datového disku}
+\begin{itemize}
+  \item Výrobce: Samsung
+  \item Model: SpinPoint F1
+  \item Kapacita: 1000\,GB 
+  \item Průměrný vyhledávací čas: 8.9\,ms  
+  \item Rychlost otáčení ploten: 7200\,rpm
+  \item Vyrovnávací paměť: 32\,MB
+  \item Rozhraní: Serial ATA II
+  \item Rychlost přenosu dat: 3\,Gbit/s
+  \item Speciální funkce: NCQ
+\end{itemize}
+
+\subsection{Operační paměť}
+Celkově počítač obsahuje čtyři paměťové moduly, kde každý má veliost 4\,GB a jsou spárovány po dvou, tak aby bylo využito podpory dual-channel. Dohromady tedy sestava disponuje 16\,GB RAM. Což je pro testovací účely víc než dostačující.
+\section{Operační systém}
+\subsection{Zvolená platforma}
+První věcí, kterou bylo třeba při výběru OS rozhodnou byla platforma potažmo jádro operačního systému. Jelikož několik zvolených virtualizačních nástrojů podporuje pouze Linux. Nebyl důvod se moc rozmýšlet. Chvíli jsem uvažoval o některé variantě BSD systému, jelikož by zde šla teoreticky rozchodit většina zvolených nástrojů, a ty které by zde nešli, mají svoji alternativu. Ale nakonec jsem tuto myšlenku potlačil, jelikož Linux je rozšířenější, a dá se předpokládat, že pokud někdo bude některý ze zmiňovaných virtualizačních nástrojů nasazovat, tak to bude právě na linuxu.
+
+\subsection{Volba distribuce}
+Dalším krokem po vybrání linuxu jako hlavní platformy, na níž budu provádět veškeré testování, byla volba distribuce. Zde to již bylo o něco složitější, jelikož existuje skoro bezpočet distribucí, kde každá má své klady a zápory.
+
+ 
+
+\section{Verze virtualizačních nástrojů}
