@@ -66,7 +66,7 @@ Z výše uvedeného textu vyplývá, že KVM virtualizace využívá plnou emula
   \item podpora pouze strojů s HW virtualizací (dnes už skoro irelevantní)
   %\item Virtio ovladače zatím dostupné pouze v Linuxu a Windows
 \end{itemize}
-\section{User Mode Linux}
+\section{User Mode \linux}
 \emph{\textbf{U}ser \textbf{M}ode \textbf{L}inux} (dále jen UML) je dalším zajímavým open source virtualizačním řešením. UML se od předchozích zmiňovaných technologí mírně liší. Dal by se totiž popsat spíše jako virtuální operační systém, než přímo jako virtuální stroj.
 
 Jedná se totiž o port Linuxu na Linux, a to ve stejném smyslu jako porty Linuxu na jiné architektury procesorů (ARM, MIPS \dots). Pro lepší pochopení předchozí věty uvedu příklad. Pokud na svém stroji s x86\_64 procesorem spouštím Linux, tak jádro Linuxu volá instrukce mého procesoru (instrukční sadu x86\_64). V případě spouštění UML se jedná v podstatě o totéž. S tím rozdílem, že při spouštění UML se nevolají instrukce procesoru, ale jaderná volání. Pokud by chom tedy nahlédly do zdrojových kódů jádra Linuxu, tak v adresáři \texttt{arch}, kde jsou uloženy podporované architektury procesorů, najdem kromě adresářů \texttt{x86\_64}, \texttt{arm}~\dots, také adresář s názvem \texttt{um}.
@@ -79,7 +79,7 @@ To samozřejmně neslo několik nevýhod. Pokaždé když došlo, k některým z
 
 Jeho snaha se nakonec vyplatila a 12. září 2002 byl UML začleněn do vývojové větve 2.5.34. Naneštěstí se později ukázalo, že není snadné přídávat nové funkce a opravy do hlavní větve jádra. Jelikož většina patchů, které Jeff poslal nebyla zařazena. A tak začal nacvhíli vyvíjet UML mimo hlavní větev. A to až do doby, kdy si jeden s vývojářů jádra těchto patchů všiml a nechal je zařadit do vývojové větve Andrew Mortona (Andrew Morton byl druhý ve vedení hned po Linusu Torvaldsovi). Zde UML zůstalo po určitou dobu a získalo si spoustu příznivců. Takže se nakonec opět dostalo do hlavní větve jádra (2.6.9) a od té doby je jeho součástí.
 
-Prvních 5 let Jeff pracoval na UML jen ve svém volném čase a živil se jako IT konzultant. To se změnilo v roce 2004, kdy dostal pracovní nabídku od firem Intel a RedHat, Inc. Obě firmy mu nabídli možnost nadále pokračovat ve vývoji UML a Jeff nakonec začal pracovat pro Intel, kde se od roku 2004 nadále věnuje vývoji UML.
+Prvních 5 let Jeff pracoval na UML jen ve svém volném čase a živil se jako IT konzultant. To se změnilo v roce 2004, kdy dostal pracovní nabídku od firem Intel a RedHat, Inc. Obě firmy mu nabídli možnost nadále pokračovat ve vývoji UML a Jeff nakonec začal pracovat pro Intel, kde se od roku 2004 nadále věnuje vývoji UML. Během následujících let se objevily informace, že Jeff pracuje na podpoře HW virtualizace, ale možná díky začlenění KVM do jádra k tomu nikdy nedošlo. 
 
 \subsection{Výhody a nevýhody}
 \subsubsection{Výhody}
@@ -130,5 +130,58 @@ Počínaje verzí 3.0 se již jednalo o produkt vyvíjený firmou Oracle Corpora
   \item některé užitečné vlastnosti dostupné jen v non-free doplňcích
   \item podpora čistě x86 architektury
 \end{itemize}
-\section{LXC}
-\section{Linux-VServer}
+\section{\linux\ Containers}
+LXC (\emph{\textbf{L}inu\textbf{x} \textbf{C}ontainers}) někdy též zvaný "`chroot na steroidech"' používá zcela odlišnou technologíí virtualizace, než všechny dosud popsané virtualizační řešení. LXC se řadí mezi tzv. virtualizace na úrovni systému (\emph{operating system-level virtualization}). Tato technologie virtualizace zvolila zcela odlišní přístup. Nesnáží se totiž o vytvoření plnohodnotného virtuálního stroje, zapomocí emulace HW komponent a následného snižování režie pomocí paravirtualizace, ale soustředí se pouze na vytvoření izolovaného virtuálního prostředí, které umožňuje sdílet prostředky mezi až tisíci virtuálních prostředí.
+
+Díky tomu, že všechny virtualizované systémy beží přímo na reálném HW a o sdílení prostředků se stará jedno jádro, je celková režie mnohonásobně menší než u řešení využívající plnou virtualizaci. Izolaci jednotlivých virtuálních systému řeší LXC pomocí funkcionalit jádra jako je cgroups a namespeces (jmenné prostory). LXC je docela mladou technologií, jelikož podpora jmenných prostorů a cgroups byla zařazena do jádra teprve nedávno.
+
+LXC není jediným zástupcem této technologie na Linuxu. Existují zde i další velmi podobné technologie jako OpenVZ nebo Linux-VServer (o tom se zde zmíním podrobněji později). Ale LXC má jednu velkou výhodu oproti ostatním, a tím je jeho začlenění v hlavní větvi jádra linuxu. To zněj dělá adepta na hlavní linuxové řešení využívající tento druch virtualizace. Ještě stojí zmínit že virtualizace na úrovni systému, není dominantou jen Linuxu. Tento druh virtualizace je velmi kvalitně zpracován i na operačních systémech FreeBSD a Solaris (FreeBSD Jails a Solaris Containers).
+
+Všechna tato řešení fungují na podobném principu. Základem této virtualizace je oddělení (izolace) procesů. Toho se dosahuje nastavením odlišného kořenového souborového systému (rootfs) pomocí systémového volámí \texttt{chroot}, které bylo vyvinuto během vývoje sedmé edice Unixu, a to již v 80. letech 20. století. Dále docházi k izolaci na úrovni síťového subsystému, aby každý virtuální systém mohl mít svoji IP adresu. Toto se u LXC řeší právě pomocí jmenných prostorů.
+
+\subsection{Vývoj}
+
+Hlavním a původním vývojářem LXC je Daniel Lezcano, který je zaměstnán v IBM. První verze LXC (verze 0.1.0) byla vydána, alspoň dle historie v git repositáři, 6. srpna 2008. V té době bylo stabilní jádro 2.6.26, které sice už mělo podporu pro většinu potřebných jmenných prostorů, ale stále zde chyběla určitá podpora. Takže v té době bylo potřeba si jádro rozšířit o tuto podporu pomocí patchů. Nebo druhým a doporučovaným řešením bylo stáhnout si z git repozitáře jádro, které již obsahovalo všechny potřebné patche.
+
+Další verze jádra 2.6.27 již obsahovala vše nutné k provolu LXC. Ale stále zde pár věcí chybělo, takže i když s tímto jádrem bylo možné LXC provozovat, tak některé funkce nebyli dostupné. Kompletní podporu LXC mělo až jádro 2.6.29, které bylo vydáno 23. března 2009. Tedy až více než půl roku poté, co vyšla první verze LXC.
+
+V té době bylo LXC ve verzi 0.6.0 a za ním následovalo několik vydání řady 0.6.x. tato vydání nepřínašela, krom drobností, žádné velké novinky. Spíše se jednalo o pročišťování kódu a odstraňování chyb. Určité zajimavé změny přinesla až verze 0.7.0. V té přibyli příkazy pro vypnutí a restartování kontejnerů (slovem kontejner se označují jednotlivá izolovaná virtuální prostředí). Druhou novinkou je podpora šablon pro příkaz lxc-create. To umožňuje snažší tvorbu kontejnerů za pomocí předpřipravených šablon. V době psaní této práce je aktuální stabilní verze 0.7.5, ta oproti 0.7.0 nepřinesla nic zláštního až na opravy různých chyb. 
+
+Nové vlastnosti se objeví až ve verzi 0.8.0. Která je momentálně ve stídia rc2 (release candidate 2). V této nové verzi přibude příkaz lxc-clone, umožňující klonování existujících kontejnerů. Dále byla přidána podpora pro tvorbu kontejnerů odlišných architektur (k tomu se částečně využívá QEMU). Navíc bylo LXC rozšířeno o podporu btrfs a lvm, a také přibylo několik přepripravených šablon pro různé distribuce (Fedora, Archlinux \dots).
+
+\subsection{Výhody a nevýhody}
+
+\subsubsection{Výhody}
+\begin{itemize}
+  \item technologie potřebné k využívání lxc jsou již obaženy v jádře
+  \item velmi malá režie
+  \item není potřeba mít procesor s podporou hardwarové virtualizace
+  \item šablony pro většiny známých distribucí
+  \item velmi snadné používání a dostatek kvalitních návodů 
+\end{itemize}
+
+\subsubsection{Nevýhody}
+\begin{itemize}
+  \item nejedná se o kompletní virtualizaci $\Rightarrow$ menší míra izolace
+  \item virtualizovaní hosti musí mít stejné jádro OS jako jejich hostitel
+  \item hosti sdílí stejné jádro (nemožnost používat různá jádra pro potřebu kompatibility s legacy HW)
+\end{itemize}
+  
+\section{\linux\ VServer\textsuperscript{\texttrademark}}
+
+Linux-VServer je jeden z dalších zástupců využívající virtualizaci na úrovni systému. Stejně jako LXC vytváří jednotlivá izolovaná virtuální prostředí, kterým se zde však neříká kontejnery, ale jsou označovány jako \emph{security context}. Jednotlivým virtuálním systémům se pak říka virtuální privátní servery, zkráceně VPS (\emph{\textbf{V}irtual \textbf{P}rivate \textbf{S}ervers}).
+
+Každý VPS je v podstatě samostatný Linuxový operační systém, na kterém mohou bežet libovolné nemodifikované aplikace a služby, tak jako by se jednalo o systém bežící mimo virtualizované prostředí. Všichny VPS mezi sebou sdílí stejné jádro a HW, což sebou nese určité výkonostní výhody, ale i nevýhody co se izolace týče.
+
+Narozdíl od LXC se zde nevyužívá technologií jako je cgroups nebo jmenné prostory, ale kompletně vlastních technologií. Díky tomu není možné používat přímo vanila jádro, ale je potřeba si jádro o podporu Linux-VServer rozřířit pomocí patchů. Což toto řešení dělá méně pohodlnou variantou než je konkurenční projekt LXC. Na druhou stranu pro většinu distribucí existují již předpripravené balíčky, tudíž není potřeba se o patchování nijak starat.
+
+\subsection{Historie}
+Počátky vývoje Linux-VServer sahají až do roku 2001. Tenkrát se projekt jmenoval jen VServer, a jeho původním vývojářem byl Jacques Gélinas. Ten vydal první verzi (0.1) dne 2. října 2001. Jacques pracoval na projektu VServer několi dalších let. Ale kolem roku 2003 se vývoj postupně zpomalil natolik, že se vývoje ujal další člověk. Tím byl Herbert Pötzl, který od té doby má nastarost vydávání nových jaderných patchů, jejich oznamování na mailových koneferencích a dává je k dispozici veřejnosti.
+
+Krom jaderného kódu, prošly změnami i nástroje pro práci s Linux-VServerem. Ty byli Enrico Scholzem v roce 2003 přepsány do jazyka C a byly přejmenovány na util-vserver. Util-vserver se snaží být co nejvíce kompatibilní s původními nástroji napsanými pro VServer, ale mnohem více se drží vývojového modelu jaderných patchů.
+
+V roce 2005 začal Benedikt Böhm pracovat na zcela nové verzi nástrojů pro ovládání Linux-VServeru, jenž měla být kompletně jinačí a postavená zcela na jinačí architektuře. Tato nová implementace je známa pod jménem VServer Control Daemon, ačkoliv měla být dokončena do konce roku 2006. Do dnešního dne nevyšla žádná její verze.
+
+\subsection{Výhody a nevýhody}
+
+Jelikož se jedná o velmi podobné řešení jako je LXC, tak většina výhod a nevýhod zůstává stejných. Jediným hlavním rozdílem je to, že LXC má navíc tu výhodu, že jeho technologie je součásti vanila hádra, kdežto Linux VServer potřebuje opatchovanou verzi jádra.
