@@ -25,6 +25,24 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{url}
+\usepackage{listings}
+
+\lstset{ %
+  language=bash,                % the language of the code
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  basicstyle=\ttfamily,
+  keywordstyle=\bfseries,
+  identifierstyle=\ttfamily,
+  commentstyle=\ttfamily,
+  stringstyle=\ttfamily,
+  showstringspaces=false
+}
+
 \DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}}
 \newcommand{\xen}{Xen\textsuperscript{\textregistered}\ }
 \newcommand{\linux}{Linux\textsuperscript{\textregistered}}
@@ -38,14 +56,26 @@
 \ifWis
 \ifx\pdfoutput\undefined % nejedeme pod pdflatexem
 \else
-  \usepackage{color}
+  \usepackage{color,fancyvrb}
   \usepackage[unicode,colorlinks,hyperindex,plainpages=false,pdftex]{hyperref}
   \definecolor{links}{rgb}{0.4,0.5,0}
   \definecolor{anchors}{rgb}{1,0,0}
+  \definecolor{gray}{rgb}{0.4,0.4,0.4}
   \def\AnchorColor{anchors}
   \def\LinkColor{links}
   \def\pdfBorderAttrs{/Border [0 0 0] }  % bez okrajů kolem odkazů
   \pdfcompresslevel=9
+  \lstset{ %
+    basicstyle=\ttfamily,
+    keywordstyle=\color{links}\bfseries,
+    identifierstyle=\ttfamily,
+    commentstyle=\color{gray}\ttfamily,
+    stringstyle=\color{anchors}\ttfamily,
+    morekeywords={*,rm,mkdir,chmod,make,cp,patch,pkgname,pkgver,
+                  pkgrel,pkgdesc,arch,url,license,depends,makedepends,
+                  conflicts,provides,md5sums},
+    showstringspaces=false
+  }
 \fi
 \fi
 

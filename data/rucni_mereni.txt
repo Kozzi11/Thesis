@@ -1,0 +1,114 @@
+FEDORA16
+
+Instalace
+ - Virtualbox: 3:15 min
+ - KVM: 2:45 min
+ - XEN: 03:16
+
+Prvni spusteni (konfigurace systemu)
+ - Virtualbox: 00:23.36 s
+ - KVM: 00:10 s
+ - XEN: 00:19.70
+ 
+Aktualizaca systremu:
+ - Virtualbox: za 04:32, 12:07 min celkoveho casu
+ - KVM: za 03:15, 09:52 min celkoveho casu
+ - XEN: za 04:09, 09:45.20
+  
+Spusteni systemu do GDM
+ - Virtualbox: 25:70 s, 35s kompletni prostredi
+ - KVM: 10 s, 15 s kompletni prostredi
+ - XEN: 18 s, 24 s kompletni prihlaseni
+ 
+ Firefox V8
+ - Virtualbox: 4875
+ - KVM: 5517
+ - XEN: 5337
+ 
+ sysbench cpu
+ - Virtualbox: 8.758
+ - KVM: 7.8706s
+ - XEN: 8.1s
+ - QEMU: 8.1s
+ 
+ sysbench memory
+ - Virtualbox: 63.2498 (1618.98 MB/sec)
+ - KVM: 145.6155s (703.22 MB/sec)
+ - XEN: 158.7868s (644.89 MB/sec)
+ - QEMU: 150.9243 (678.49 MB/sec)
+ 
+ sysbench fileio rndrw
+ - Virtualbox: 40.3571s (3.8717MB/sec)
+ - KVM: 32.731s (4.7738MB/sec)
+ - XEN: 19.7347s (7.9175MB/sec)
+ - QEMU: 33.8127s (4.621MB/sec)
+ 
+ sysbench fileio seqwr
+ - Virtualbox: 19.6383 (104.29MB/sec)
+ - KVM: 22.0753 (92.773MB/sec)
+ - XEN: 23.0448s (88.87MB/sec)
+ - QEMU: 23.2757s (87.989MB/sec)
+ 
+ hwinfo (cpu blowfish) lower is better (sec)
+ - Virtualbox: 14.27
+ - KVM: 13.29
+ - XEN: 13.38
+ - QEMU: 13.59
+ 
+ hwinfo (cpu cryptohash) higher is better {MiB/s}
+ - Virtualbox: 95.24
+ - KVM: 102.81
+ - XEN: 104.44
+ - QEMU: 102.45
+ 
+ hwinfo (cpu fibonacci) lower is better (sec)
+ - Virtualbox: 2.80
+ - KVM: 2.52
+ - XEN: 2.34
+ - QEMU: 2.35
+ 
+ hwinfo (cpu n-queens) lower is better (sec)
+ - Virtualbox: 6.03
+ - KVM: 5.71
+ - XEN: 5.68
+ - QEMU: 5.80
+ 
+ hwinfo (FPU FFT) lower is better (sec)
+ - Virtualbox: 6.37
+ - KVM: 6.76
+ - XEN: 5.81
+ - QEMU: 5.93 
+ 
+ hwinfo (FPU raytracing) lower is better (sec)
+ - Virtualbox: 6.03
+ - KVM: 9.77
+ - XEN: 5.50
+ - QEMU: 5.62
+
+//////////////////////
+
+WindowsXP
+
+Instalace
+ - Virtualbox: 2:00 , 06:41 kompletni instalace
+ - KVM: 4:33 min kopirovani dat, 16:50 kompletni instalace
+ - XEN: 02:59, 10:10
+ 
+Prvni sp:steni (konfigurace systemu a instal ovladacu)
+ - Virtualbox: start do grafiky 00:4.82, 00:10.50
+ - KVM: start do grafiky 00:11.25, 00:18.14 komplet prostredi
+ - XEN: 00:10.18, 00:19.54
+  
+Nasledujici start systemu
+ - Virtualbox: 00:13.07
+ - KVM: 00:18.60
+ 
+ CPU free Benchmark - less is better
+ - VirtualBox: 28.37 seconds
+ - KVM: 28.69
+ - XEN: 29.04
+ 
+ chromium v8
+  - Virtualbox: 7431
+  - KVM: 7307
+  - XEN: 7921

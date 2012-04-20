@@ -67,8 +67,37 @@ Celkově počítač obsahuje čtyři paměťové moduly, kde každý má veliost
 První věcí, kterou bylo třeba při výběru OS rozhodnou byla platforma potažmo jádro operačního systému. Jelikož několik zvolených virtualizačních nástrojů podporuje pouze Linux. Nebyl důvod se moc rozmýšlet. Chvíli jsem uvažoval o některé variantě BSD systému, jelikož by zde šla teoreticky rozchodit většina zvolených nástrojů, a ty které by zde nešli, mají svoji alternativu. Ale nakonec jsem tuto myšlenku potlačil, jelikož Linux je rozšířenější, a dá se předpokládat, že pokud někdo bude některý ze zmiňovaných virtualizačních nástrojů nasazovat, tak to bude právě na linuxu.
 
 \subsection{Volba distribuce}
-Dalším krokem po vybrání linuxu jako hlavní platformy, na níž budu provádět veškeré testování, byla volba distribuce. Zde to již bylo o něco složitější, jelikož existuje skoro bezpočet distribucí, kde každá má své klady a zápory.
+Dalším krokem po vybrání linuxu jako hlavní platformy, na níž budu provádět veškeré testování, byla volba distribuce. Zde to již bylo o něco složitější, jelikož existuje skoro bezpočet distribucí, kde každá má své klady a zápory. Prvním rozhodnutím, které zúžilo možný počet kandidátů, byla snaha vybrat distribuci, poskytující dostatek dokumentace, popisující zprovoznění pokud možno co největšího počtu z vybraných virtualizačních nástrojů. Druhým kritériem byla co největší aktuálnost dostupných verzí jednotlivých softwarových komponent distribuce.
+
+Důvodem proč jsem hledal distribuci s co nejnovějšími verzemi aplikací, byl fakt, že virtualizační nástroje se velmi rychle vyvíjí a já chci poskytnout co nejvěrohodnější výsledky těchto nástrojů v dnešní době. Což by mělo mít za výhodu aktuálnost mých výsledků i po delší době. Tento přístup má i svě stinné stránky. Nejnovější verze sebou krom nejnovějších vylepšení mohou nést i některé nové chyby, což může vést k určitým nestabilitám dané aplikace. Jelikož většina použitého software bude ve stabilních verzích, není toto riziko příliš vysoké.
+
+Oba dva předchozí požadavky nejlépe splňovaly dve distribuce. Jednou znich bylo Ubuntu, které patří mezi jednu z nejrozšířenějších distribucí Linuxu. Tudíž pro ni existuje i spousta předpripravených balíčků z potřebnými aplikacemi a nástroji. A také kolem ní existuje velká komunita, kam se může člověk obrátit s případnými problémy. Druhým adeptem byla o něco méně rozšířená, avšak v poslední době velmi populární distribuce s názvem Arch Linux. Jeho hlavní výhodou jsou opravdu velmi aktuální verze programů a aplikací. Jedná se o tzv. rolling updates distribuci, to znamená, že se nevydávají jednotlivé verze distribuce, ale distribuce je aktualizovaná postupně pomocí aktualizací, kde tyto aktualizace nejsou pouze opravné verze, ale i zcela nové verze jednotlivých komponent. Co se komunity týče, tak ačkoliv není tak rozsáhlá jako u předchozího adepta, tak díky své aktivitě a odborným znalostem lidí pohybující se okolo této distribuce, svojí kvalitou komunitu okolo Ubuntu předčí. Další věcí, která mi při rozhodování mezi těmito dvěma adepty pomohla rozhodnout, byla podpora vytváření vlastních balíčků. Žádná jiná mně známá distribuce nenabízí tak jednoduchý způsob tvorby balíčků s vlastním software, jako má Arch Linux.
+
+Nakonec jsem se tedy rozhodl pro Arch Linux. Jeho instalaci zde probírat nebudu, jelikož je to mimo rozsah této práce. Případné zájemce odkáži na wiki stránku zabívající se instalací této distribuce, která je dostupná hned v několika jazykových mutací\footnote{\url{https://wiki.archlinux.org/index.php/Official\_Installation\_Guide}}
+\footnote{\url{https://wiki.archlinux.org/index.php/Official\_Installation\_Guide\_(Česky)}}
+\footnote{\url{https://wiki.archlinux.org/index.php/Official\_Installation\_Guide\_(Slovenský)}}.
 
  
 
-\section{Verze virtualizačních nástrojů}
+\section{Příprava virtualizačních nástrojů}
+V této sekci si lehce popíšeme instalaci a konfiguraci testovaných nástrojů a dalších podpůrných utilit. Rád bych upozornil, že následující text předpokládá pokročilou znalost administrace OS Linux a alspoň částaečnou znalost distribuce Arch Linux.
+\subsection{Instalace}
+\subsubsection{\xen}
+Při instalaci a zprovozňování Xen hypervizoru jsem narazil na pár problémů. Prvním 
+\subsubsection{KVM}
+\subsubsection{UML}
+\subsubsection{VirtualBox}
+\subsubsection{LXC}
+\subsubsection{Linux-VServer}
+\subsubsection{Libvirt}
+\subsubsection{Virtual Machine Manager}
+
+\subsection{Konfigurace}
+\subsubsection{\xen}
+\subsubsection{KVM}
+\subsubsection{UML}
+\subsubsection{VirtualBox}
+\subsubsection{LXC}
+\subsubsection{Linux-VServer}
+\subsubsection{Libvirt}
+\subsubsection{Virtual Machine Manager}
