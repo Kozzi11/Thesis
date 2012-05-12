@@ -4,5 +4,7 @@
 *.log
 *.out
 *.pdf
+*.bak
+/Zdroje
 *~
 *.toc

@@ -897,8 +897,9 @@ FUNCTION {format.in.ed.booktitle}
 { format.booktitle duplicate$ empty$ 'skip$
     {
       format.bvolume duplicate$ empty$ 'pop$
-        { ", " swap$ * * }
+        { " " * swap$ }
       if$
+      
       editor "editor" format.names.ed duplicate$ empty$ 'pop$
         {
           bbl.edby
@@ -908,6 +909,10 @@ FUNCTION {format.in.ed.booktitle}
           " " * swap$
           * }
       if$
+      howpublished duplicate$ empty$ 'pop$
+        { " " swap$ * * }
+      if$
+
       word.in swap$ *
     }
   if$

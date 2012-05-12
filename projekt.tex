@@ -26,6 +26,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{url}
 \usepackage{listings}
+\usepackage{alltt}
+\renewcommand{\ttdefault}{txtt}
 
 \lstset{ %
   language=bash,                % the language of the code
@@ -84,7 +86,7 @@
 \projectinfo{
   %Prace
   project=BP,            %typ prace BP/SP/DP/DR
-  year=20012,             %rok
+  year=2012,             %rok
   date=\today,           %datum odevzdani
   %Nazev prace
   title.cs={Porovnání virtualizačních nástrojů\\ operačních systémů},  %nazev prace v cestine
@@ -98,7 +100,7 @@
   %Skolitel
   supervisor= Jan Samek, %jmeno prijmeni skolitele
   supervisor.title.p=Ing.,   %titul pred jmenem (nepovinne)
-  %supervisor.title.a={Ph.D.},    %titul za jmenem (nepovinne)
+  supervisor.title.a={Ph.D.},    %titul za jmenem (nepovinne)
   %Klicova slova, abstrakty, prohlaseni a podekovani je mozne definovat 
   %bud pomoci nasledujicich parametru nebo pomoci vyhrazenych maker (viz dale)
   %===========================================================================
@@ -109,7 +111,7 @@
 }, %klicova slova v anglickem jazyce
   %Abstract
   abstract.cs={V této práci se čtenář dozví co znamená a co si má představit pod pojmem virtualizace. Zjistí jaké typy virtualizace operačních systémů rozlišujeme (plná virtualizace, paravirtualizace, virtualizace na urovni systému\dots), a jaké jsou jejich výhody a nevýhody. Následně se
-seznámí s open source virtualizačními stroji pro různé operační systémy. Dozví se, které typy virtualizace danný nástroj umožňuje, v jaké míře, a které platformy jsou podporovány. Následovat bude popis instalace a konfigurace jednotlivých nástrojů, způsob jejich testování a výsledky jednotlivých testů. Po přečtení by měl čtenář vedět, jaký virtualizační nástroj je nejvhodnější pro jeho potřeby.
+seznámí s open source virtualizačními stroji pro různé operační systémy. Dozví se, které typy virtualizace daný nástroj umožňuje, v jaké míře, a které platformy jsou podporovány. Následovat bude popis instalace a konfigurace jednotlivých nástrojů, způsob jejich testování a výsledky jednotlivých testů. Po přečtení by měl čtenář vedět, jaký virtualizační nástroj je nejvhodnější pro jeho potřeby.
 }, % abstrakt v ceskem jazyce
   abstract.en={In this thesis, the reader learns what “virtualization” term means and what should imagine under this term. He find out which type of virtualization we distinguish and their pros and cons. Then he become familiar with open source virtualization tools for different operation systems. Next he get some information about these tools. Which platform and virtualization type they support. How to install and configure them. Then will be follow some benchmarks for these tools. So after read, one should be able to knew which virtualization tool is best choice for his needs.}, % abstrakt v anglickem jazyce
   %Prohlaseni
@@ -132,7 +134,7 @@ seznámí s open source virtualizačními stroji pro různé operační systémy
 %Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.}
 
 %Podekovani (nepovinne)
-%\acknowledgment{V této sekci je možno uvést poděkování vedoucímu práce a těm, kteří poskytli odbornou pomoc
+%\acknowledgment{V této sekci je možno uv ést poděkování vedoucímu práce a těm, kteří poskytli odbornou pomoc
 %(externí zadavatel, konzultant, apod.).}
 
 \begin{document}
