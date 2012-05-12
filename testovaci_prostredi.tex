@@ -77,7 +77,14 @@ Nakonec jsem se tedy rozhodl pro Arch Linux. Jeho instalaci zde probírat nebudu
 \footnote{\url{https://wiki.archlinux.org/index.php/Official\_Installation\_Guide\_(Česky)}}
 \footnote{\url{https://wiki.archlinux.org/index.php/Official\_Installation\_Guide\_(Slovenský)}}.
 
- 
+\subsection{Virtualizované systémy a jejich konfigurace}
+Jak už jsem psal v této kapitole jako operační systém pro hostitele jsem si zvolil Arch Linux. V případě hosta jsem se rozhodl hned pro dvě distribuce. Důvodem bylo zjistit, zda rozdílné distribuce běží ve virtualizovaném prostředí odlišně. Jedním vybraným kandidátem je opět Arch Linux a jako další byla zvolena Fedora Core 16. Důvodem výběru těchto dvou kandidátů je především jejich aktuálnost, hlavně jejich aktuální verze jádra. Což by mělo mít za následek, co možná nejpokročilejší podporu aktuálních verzí virtualizačních nástrojů, a také zaručovat co možná největší kompatibilitu s jádrem hostitele. U Fedory jsem vzlal taky v potaz, že je vývojovou verzí pro komerční RedHat Linux.
+
+Obě tyto distribuce byli ponechány během testování v základním nastavení. Tím mám namysli, že zde nebyli prováděny žádné zásahy, které by ovlivňovali jejich výkonnost v testech (změna konfigurace jádra a podobně). Samozřejmě po dobu testování nebyly na těchto systémech prováděny aktualizace, tak aby všechny výsledky byly co nejvěrohodnější. Jediné úpravy byly ty, které přímo souviseli s podporou dané virtualizační technologie, jako například doinstalování rozšíření pro VirtualBox atd.
+
+U obou dvou distribucí i u všech virtualizačních technologií jsem se snažil vytvořit pokud možno co nejhomogennější prostředí. Všem virtuálním systémům bylo vždy přiděleno jen jedno jádro a 2048\,MB operační paměti.
+
+Krom těchto dvou hostů s operačním systémem Linux, jsem zvolil i jednoho zástupce s operačním systémem Microsoft Windows. Jelikož kontejnerová řešení jako je LXC, Linux-VServer a OpenVZ podporují jen Linuxové hosty. Bude Windows host testován pouze v KVM, VirtualBox a Xen hypervizoru.
 
 \section{Příprava virtualizačních nástrojů}
 V této sekci si lehce popíšeme instalaci a konfiguraci testovaných nástrojů a dalších podpůrných utilit. Rád bych upozornil, že následující text předpokládá pokročilou znalost administrace OS Linux a alespoň částečnou znalost distribuce Arch Linux.

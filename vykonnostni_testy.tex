@@ -1,11 +1,5 @@
 \section{Metodika měření, aneb co a jak se bude měřit}
 V této předposlední kapitole si řekneme něco málo o tom, jak probíhalo samostatné testování. Představím nástroje, jenž byli použity a nakonec si ve formě grafů ukážeme, jak obstáli naši kandidáti v jednotlivých testech.
-\subsection{Virtualizované systémy a jejich konfigurace}
-Jak už jsem psal v předešlé kapitole jako operační systém pro hostitele jsem si zvolil Arch Linux. V případě hosta jsem se rozhodl hned pro dvě distribuce. Důvodem bylo zjistit, zda rozdílné distribuce běží ve virtualizovaném prostředí odlišně. Jedním vybraným kandidátem je opět Arch Linux a jako další byla zvolena Fedora Core 16. O výhodách těchto systémů jsem se již zmiňoval, takže se zde o nich znovu nebudu rozepisovat.
-
-Obě tyto distribuce byli ponechány během testování v základním nastavení. Tím mám namysli, že zde nebyli prováděny žádné zásahy, které by ovlivňovali jejich výkonnost v testech (změna konfigurace jádra a podobně). Samozřejmě po dobu testování nebyly na těchto systémech prováděny aktualizace, tak aby všechny výsledky byly co nejvěrohodnější. Jediné úpravy byly ty, které přímo souviseli s podporou dané virtualizační technologie, jako například doinstalování rozšíření pro VirtualBox atd.
-
-U obou dvou distribucí i u všech virtualizačních technologií jsem se snažil vytvořit pokud možno co nejhomogennější prostředí. Všem virtuálním systémům bylo vždy přiděleno jen jedno jádro a 2048\,MB operační paměti.
 
 \section{Phoronix Test Suite}
 Aby bylo testování co nejpohodlnější, a aby bylo zaručeno co nejpřesnější měření, které se bude dát zopakovat. Rozhodl jsem se pro vlastní testování využít testovací software Phoronix Test Suite (dále jen PTS). PTS je nástroj a sada testů vytvořených webovým portálem Phoronix pro automatické testování na platformě Linux. Později byl nástroj rozšířen i o řadu dalších operačních systémů. Celý nástroj je napsán za pomocí skriptovacího jazyka PHP a pokud je v systému nainstalována knihovna PHP-GTK, lze použít i grafické prostředí tohoto nástroje.
