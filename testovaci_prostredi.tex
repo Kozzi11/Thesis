@@ -93,7 +93,7 @@ V této sekci si lehce popíšeme instalaci a konfiguraci testovaných nástroj�
 Xen hypervizor není dostupný v oficiálních repositářích Arch Linuxu, ale za pomocí ABS (\emph{\textbf{A}rch \textbf{B}uild \textbf{S}ystem}) jsem si sestavit vlastní balíček. K tomuto účelu byl použit PKGBUILD, který je součástí přílohy této práce viz. \ref{xenpkgbuild}.
 
 Po vytvoření a instalaci Xen hypervizoru je ještě třeba správně nastavit zavaděč např. GRUB, tak aby bylo možné najet do systému s podporou Xen hypervizoru. Já jsem využil existující (součást vytvořeného instalačního balíčku) šablony pro GRUB2, která mi při generování konfiguračního souboru pro zavaděč automaticky rozpoznala a nastavila příslušnou sekci pro Xen hypervizor.
-\newpage
+
 Pokud je xen správně nainstalován a zavaděč správně nastaven. Mělo by jít po restartu najet do systému s podporou xen. V mém případě se však ukázalo, že aktuální verze jádra 3.3 obsahuje chybu, která neumožňuje běh Xen hypervizoru. Tento problém je vyřešen workaroundem ve vývojové verzi jádra 3.4 a plně vyřešen bude až ve verzi 3.5. Já abych mohl pokračovat jsem využil patch, který byl použit právě pro nadcházející jádro 3.4 \footnote{\url{http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=commitdiff;h=2531d64b6fe2724dc432b67d8dc66bd45621da0b;hp=e95ae5a4939c52ccab02a49238d5d15d492b2598}}.
 
 Po aplikaci tohoto workaraoundu na distribuční jádro, jsem byl po restartu systému již schopný nabootovat do Dom0 hosta běžícím na Xen hypervizoru.
@@ -150,7 +150,7 @@ Je sice pěkné mít toolkit jako je libvirt, který nám nabízí programátors
   \caption{Okno pro konfiguraci virtuálního stroje.}
   \label{obr:vmmc}
 \end{figure}
-\newpage
+
 Instalace Virt-manager je snadná, jelikož je součástí komunitního repositáře a není třeba jej nijak upravovat, stačí jej nainstalovat pomocí nástroje pro správu balíčků \texttt{pacman}, případně stejně dobře poslouží i již zmiňovaný \texttt{yaourt}, který je nadstavbou a umí pracovat i s normálními repozitáři.
 \subsection{Konfigurace a použití}
 \subsubsection{\xen}
