@@ -1,0 +1,5 @@
+PWD /home/kozzi/Dokumenty/Skola/BP/Thesis
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT obsah.tex
+OUTPUT obsah.log

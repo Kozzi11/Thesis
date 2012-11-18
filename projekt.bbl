@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -7,97 +7,5 @@
   \urlstyle{rm}\Url}\fi
 \providecommand{\selectlanguage}[1]{\relax}
 \providecommand{\eprint}[2][]{\url{#2}}
-
-\bibitem{cpu:cray}
-C-Ray Raytracing Benchmark Results. [online], 12.05.2012.
-\newline\urlprefix\url{http://www.futuretech.blinkenlights.nl/c-ray.html}
-
-\bibitem{io:netperf}
-Care and Feeding of Netperf 2.5.X. [online], 12.05.2012.
-\newline\urlprefix\url{http://www.netperf.org/svn/netperf2/tags/netperf-2.5.0/%
-doc/netperf.html}
-
-\bibitem{cpu:superpi}
-Super PI. In \emph{Wikipedia: the free encyclopedia} [online], San Francisco
-  (CA): Wikimedia Foundation, 15.04.2012.
-\newline\urlprefix\url{http://en.wikipedia.org/wiki/Super_PI}
-
-\bibitem{wiki:ovz}
-OpenVZ. In \emph{Wikipedia: the free encyclopedia} [online], San Francisco
-  (CA): Wikimedia Foundation, 20.04.2012.
-\newline\urlprefix\url{http://en.wikipedia.org/wiki/OpenVZ}
-
-\bibitem{lvs:history}
-Overview\#History. In \emph{Linux VServer} [online], Linux-VServer.org,
-  21.10.2011.
-\newline\urlprefix\url{http://linux-vserver.org/Overview#History}
-
-\bibitem{chisnall:xen}
-Chisnall, D.: \emph{The Definitive Guide to the Xen Hypervisor}, kapitola~1.
-  Prentice Hall Open Source Software Development, Prentice Hall, 2007, ISBN
-  978-0132349710, s. 9--13.
-
-\bibitem{dike:uml}
-Dike, J.: \emph{User Mode Linux®}. Prentice Hall, první vydání, April 2006,
-  ISBN 978-0131865051, 352 s.
-
-\bibitem{hagen:xen}
-von Hagen, W.: \emph{Professional Xen® Virtualization}. Indianapolis, Indiana:
-  Wiley Publishing, Inc., 2008, ISBN 978-0-470-13811-3.
-
-\bibitem{hess:pract}
-Hess, K.; Newman, A.: \emph{Practical virtualization solutions: Virtualization
-  from the Trenches}, kapitola~5. Negus Software Solutions, Prentice
-  Hall/Pearson Education, 2010, ISBN 978-0-13-714297-2, s. 67--86.
-
-\bibitem{ram:ramspeed}
-Hollander, R.~M.; Bolotoff, P.~V.: RAMspeed, a cache and memory benchmarking
-  tool. [online], 12.05.2012.
-\newline\urlprefix\url{http://alasir.com/software/ramspeed}
-
-\bibitem{huynh:kvm}
-Huynh, K.; Hajnoczi, S.: KVM / QEMU Storage Stack Performance Discussion. In
-  \emph{Linux Plumbers Conference}, IBM Corporation, 2010.
-\newline\urlprefix\url{http://www.tdeig.ch/kvm/pasche/43_Storage.pdf}
-
-\bibitem{kivity:kvm}
-Kivity, A.; Kamay, Y.; Laor, D.; aj.: kvm: the Linux Virtual Machine Monitor.
-  In \emph{Proceedings of the Linux Symposium}, Ottawa, Ontario Canada, June
-  2007.
-\newline\urlprefix\url{http://www.linux-kvm.com/sites/default/files/kivity-Rep%
-rint.pdf}
-
-\bibitem{xen:sym}
-Pratt, I.; Barham, P.; Dragovic, B.; aj.: Xen and the Art of Virtualization. In
-  \emph{Symposium on Operating Systems Principles}, University of Cambridge
-  Computer Laboratory 15 JJ Thomson Avenue, Cambridge, UK, CB3 0FD, Říjen
-  2003.
-\newline\urlprefix\url{http://www.cl.cam.ac.uk/research/srg/netos/papers/2003-%
-xensosp.pdf}
-
-\bibitem{romero:vbox}
-Romero, A.~V.: \emph{VirtualBox 3.1: Beginner's Guide}. 32 Lincoln Road Olton
-  Birmingham, B27 6PA, UK: Packt Publishing, April 2010, ISBN 978-1847199140,
-  348 s.
-
-\bibitem{ruest:virt}
-Ruset, D.; Ruest, N.: \emph{Virtualizace: podrobný průvodce}. Holandská 8,
-  639 00 Brno: Computer press, a.s., první vydání, 2010, ISBN
-  978-80-251-2676-9.
-
-\bibitem{tomecek:ovz}
-Tomeček, J.: OpenVZ -- instalace a spuštění. [online], 15.8.2007.
-\newline\urlprefix\url{http://www.abclinuxu.cz/clanky/system/openvz-instalace-%
-a-spusteni}
-
-\bibitem{tomecek:lvs}
-Tomeček, J.: Linux-VServer -- instalace a spuštění. [online], 7.8.2007.
-\newline\urlprefix\url{http://www.abclinuxu.cz/clanky/system/linux-vserver-ins%
-talace-a-spusteni}
-
-\bibitem{cpu:systester}
-Tsatiris, L.; Anastasiadis, P.: About System Stability Tester. [online],
-  12.05.2012.
-\newline\urlprefix\url{http://systester.sourceforge.net/about.php}
 
 \end{thebibliography}
