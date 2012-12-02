@@ -1,5 +1,39 @@
 
 \section{Úvod}
+Potřebu zaznamenávat informace (data) má lidstvo již od nepaměti. Jedním z prvních způsobů bylo vytesávaní znaků do kamenných desek. To bylo později nahrazeno zaznamenáváním 
+na papirus ve formě svitků. Papirus časem nahradil pergamen a ten byl nahrazen papírem a místo svitků se začaly texty uchovávat ve formě volných listů případně svazků a knížek.
+
+Uchovávaní informací je ale jen jedna část problemu. Jelikož k čemu by nám sloužily zaznamenaná data, kdybychom se vnich nedokázali orientovat, a neuměli v nich vyhledávat potřebné informace.
+Proto vznikly různé způsoby, jak jednotlivé dokumenty strukturovat (číslovaní stránek (svitků), kapitoly, rejstříky\dots). 
+
+Krom orientace v samotném dokumentu, je zapotřebí mít možnost dohledávat i jednotlivé dokumenty jako celky.
+Pro tyto účely se využívá zařazení dokumentů do různých skupin (kategorií). K dělení do kategorií se pak využívá různých atributů, jimiž daný dokument disponuje.
+Mezi tyto atributy patří například název, autor, téma, datum, typ dokumentu atd. Krom zařazení do kategorie se dá využít atributů i při vyhledávání či řazení dokumentu.
+
+Předchozí odstavec si nejlépe představíme na příkladu kartotéky obvodního lékaře. Ten při hledání karty pacienta vyhledavá dle atributů uvedených v tabulce \ref{kartoteka}. Za předpokladu, že jsou jednotlivé karty pacientů rozděleny do zásuvek podle roku narození. A zásuvky jsou rozděleny do sekcím označené názvem měsíce narození. A tyto sekce se dále dělí na podsekce dle dne narození a ty jsou následně seřazeny abecdně podle přímení pacienta. Tak by postup vyhledání pacientovy karty mohl být následující.
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|l|r|}
+\hline
+    \bfseries attribut & \bfseries hodnota\\ \hline
+    jméno pacienta & Daniel Kozák \\
+    datum narození & 23.11.1988 \\
+    adresa trvalého pobytu & Bratrušov 95 \\
+    \hline
+\end{tabular}
+\caption{Informace o pacientovy využité pro nalezení jeho karty.}
+\label{kartoteka}
+\end{center}
+\end{table}
+\newpage
+Lékař otevře zásuvku s označením ročník 1988. Zde se přesune na záložku s označením Listopad a vní se přesune na podzáložku s označením 23. Zde snadno vyhledá všechny pacienty s přímením Kozák a mezi nimy vybera pacienta s jménem Daniel a trvalým pobytem na adrese Bratrušov 95.\footnote{V tomto zjednodušeném příkladu předpokládám existenci pouze jednoho pacienta se stejným jménem, datem narození a adresou trvalého pobytu. V praxi by bylo na kartě uvedene ještě rodné číslo.}
+
+V předchozím příkladě by nalezení pacientovy karty trvalo několik vteřin. Což se dá brát jako dostačující, ale co v případě kdy lékař dostane za úkol nalést v této kartotéce, karty všech pacientů s trvalým pobytem v Bratrušově. V tomto případě by lékaři nezbylo nic jiného, než projít karty všech pacientů a znich vybrat ty, které mají u trvalého pobytu uvedeno Bratrušov. Toto by v závislosti na počtu pacientů mohlo lékaří či jeho sestřičce zabrat desítky minut nebo i hodin. To už není ideální doba a jediný způsob, jak tento čas zkrátit, je využít víc lidí k prohledávání kartotéky (paralerní zpracování).
+
+Revolucí zaznamenávání a zpracovaní informací je jejich ukládání v elektonické formě. Zde je papír a jeho obsah nahrazen souborem ležícím na paměťovém úložišti.Vyhledávaní jednotlivých dokumentů má nastarosti souborový systém.
+
+
+
 \cite[s.~1--52]{korth:dbsc}
 \section{Datové modely}
 \subsection{Relační model}

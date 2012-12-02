@@ -1,4 +1,4 @@
-PWD /home/kozzi/Dokumenty/Skola/BP/Thesis
+PWD /home/kozak/Dokumenty/Skola/Thesis
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
 INPUT projekt.tex
@@ -92,6 +92,8 @@ INPUT /usr/share/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
 INPUT /usr/share/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
 INPUT /usr/share/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 INPUT /usr/share/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+INPUT /usr/share/texmf-dist/tex/latex/oberdiek/auxhook.sty
+INPUT /usr/share/texmf-dist/tex/latex/oberdiek/auxhook.sty
 INPUT /usr/share/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 INPUT /usr/share/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 INPUT /usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def
@@ -192,6 +194,18 @@ INPUT koncepty_a_modely.tex
 INPUT koncepty_a_modely.tex
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0900.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0600.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
 INPUT java_language.tex
@@ -213,7 +227,6 @@ INPUT projekt.bbl
 INPUT /usr/share/texmf-dist/tex/latex/txfonts/t1txtt.fd
 INPUT /usr/share/texmf-dist/tex/latex/txfonts/t1txtt.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/txfonts/t1xtt.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
 INPUT prilohy.tex
 INPUT prilohy.tex
 INPUT projekt.aux
@@ -228,7 +241,9 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb
