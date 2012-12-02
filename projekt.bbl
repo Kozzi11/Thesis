@@ -1,4 +1,4 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -7,5 +7,48 @@
   \urlstyle{rm}\Url}\fi
 \providecommand{\selectlanguage}[1]{\relax}
 \providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem{odmg}
+Berler, M.; Eastman, J.; Jordan, D.; aj.: The Object Data Standard: ODMG 3.0.
+  In \emph{Data Management Systems}, editace R.~G. Cattell; D.~K. Barry
+  [online], Morgan Kaufmann Series, San Francisco (CA): Morgan Kaufmann, první
+  vydání, Únor 2000, ISBN 978-1558606470, str. 280.
+\newline\urlprefix\url{http://www.odbms.org/odmg/OG/book.aspx}
+
+\bibitem{jpa:spec}
+DeMichiel, L.: JSR 317: JavaTM Persistence API, Version 2.0. [online], Prosinec
+  2009.
+\newline\urlprefix\url{http://download.oracle.com/otndocs/jcp/persistence-2.0-fr-eval-oth-JSpec/}
+
+\bibitem{ezzio:uujdo}
+Ezzio, D.: \emph{Using and Understanding Java Data Objects}. Apress, první
+  vydání, Červen 2003, ISBN 978-1590590430, 456 s.
+
+\bibitem{fisher:jdbc}
+Fisher, M.; Ellis, J.; Bruce, J.: JDBC™ API Tutorial and Reference. The Java
+  Series..from the Source™, Prentice Hall, třetí vydání, Červen 2003,
+  ISBN 978-0321173843, str. 1280.
+
+\bibitem{jordan:jdo}
+Jordan, D.; Russel, C.: \emph{Java Data Objects}. 1005 Gravenstein Highway
+  North, Sebastopol, CA 95472: Packt Publishing, první vydání, Duben 2003,
+  ISBN 978-0596002763, 380 s.
+
+\bibitem{donahue:jdpb}
+O'Donahue, J.: \emph{Java Database Programming Bible}, kapitola~4. John Wiley
+  \& Sons, první vydání, Červenec 2002, ISBN 978-0764549243, str. 702.
+
+\bibitem{roos:jdo}
+Roos, R.: \emph{Java Data Objects}. Pearson Education, první vydání, Říjen
+  2002, ISBN 978-0321123800, 272 s.
+
+\bibitem{korth:dbsc}
+Silberschatz, A.; Korth, H.~F.; Sudarshan, S.: \emph{Database System Concepts}.
+  McGraw-Hill, 6 vydání, 2010, ISBN 978-0073523323.
+
+\bibitem{tyagi:cjdo}
+Tyagi, S.; McCammon, K.; Vorburger, M.; aj.: \emph{Core Java Data Objects}. 901
+  San Antonio Road, Palo Alto, California: Prentice Hall, první vydání,
+  Září 2003, ISBN 978-0131407312, 576 s.
 
 \end{thebibliography}
