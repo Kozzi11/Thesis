@@ -31,17 +31,24 @@ Lékař otevře zásuvku s označením ročník 1988. Zde se přesune na zálož
 V předchozím příkladě by nalezení pacientovy karty trvalo několik vteřin. Což se dá brát jako dostačující, ale co v případě kdy lékař dostane za úkol nalést v této kartotéce, karty všech pacientů s trvalým pobytem v Bratrušově. V tomto případě by lékaři nezbylo nic jiného, než projít karty všech pacientů a znich vybrat ty, které mají u trvalého pobytu uvedeno Bratrušov. Toto by v závislosti na počtu pacientů mohlo lékaří či jeho sestřičce zabrat desítky minut nebo i hodin. To už není ideální doba a jediný způsob, jak tento čas zkrátit, je využít víc lidí k prohledávání kartotéky (paralerní zpracování).
 
 Revolucí zaznamenávání a zpracovaní informací je jejich ukládání v elektonické formě. Zde je papír a jeho obsah nahrazen souborem ležícím na paměťovém úložišti.Vyhledávaní jednotlivých dokumentů má nastarosti souborový systém.
-
-
-
 \cite[s.~1--52]{korth:dbsc}
+
 \section{Datové modely}
+Základní součástí databáze je její datový model, ten popisuje základní strukturu dat, to jak jsou data uložena, uspořádána, jejich sémantiku, vztahy mezi daty a jejich integritní omezení. Datový model umožňuje popsat návrh databáze na její fyzické i logické úrovni.\cite[s.~945--975]{korth:dbsc}
+
+Datových modelů existuje celá řada. Já se zde omezím jen na základní čtyři, které jsou uplatněny v této práci.
+
 \subsection{Relační model}
+Je nejrozšířenějším používaným datovým modelem dnešení doby a velká část součastných databázových systému je založena právě na tomto datovém modelu.
+
+Relační model je založen na kolekcích tabulek, kterých se využíva jak pro reprezentaci dat, tak i pro vztahy mezi těmito daty. Každá tabulka má několik sloupců, kde každý sloupec (též označován jako atribut) má svůj unikátní název (identifikátor), typ a rozsah neboli doménu.
 \subsection{Entity-relationship model}
+Entity-relationship (E-R) datový model využívá kolekce jednoduchých objektů, nazývaných entity, a vztahů mezi těmito entitami. Entita je abstrakcí nějaké věci nebo objektu z reálného světa, která je jednoznačně odlišitelná od ostatních objektů. 
+
+Entity-relationship datový model je široce využíván při databázovém návrhu. Výsledkem návrhu jsou diagramy, které se nazývají entity-relationship diagramy neboli ER diagramy (zkráceně \emph{ERD}). 
 \subsection{Objektově orientovaný model}
 \subsection{Semi-structured (Multivalue) model}
 \section{Typy datbází}
 \subsection{Relační databáze}
 \subsection{Objektově-relační databáze}
 \subsection{Objektové a NoSQL databáze}
-\cite[s.~945--975]{korth:dbsc}

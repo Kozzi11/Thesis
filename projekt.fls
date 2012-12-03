@@ -1,4 +1,4 @@
-PWD /home/kozak/Dokumenty/Skola/Thesis
+PWD /home/kozzi/Dokumenty/Skola/BP/Thesis
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
 INPUT projekt.tex
