@@ -48,6 +48,7 @@
 \DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}}
 \newcommand{\xen}{Xen\textsuperscript{\textregistered}\ }
 \newcommand{\linux}{Linux\textsuperscript{\textregistered}}
+
 %zde muzeme vlozit vlastni balicky
 
 
@@ -80,7 +81,8 @@
   }
 \fi
 \fi
-
+\usepackage{cleveref}
+\crefformat{footnote}{#2\footnotemark[#1]#3}
 %Informace o praci/projektu
 %---------------------------------------------------------------------------
 \projectinfo{
@@ -106,7 +108,7 @@
   %===========================================================================
   %Klicova slova
   keywords.cs={Databáze, databázové systémy, SŘBD, objektové databáze, relační databáze, objektově relační mapování, ORM, OHM, Java, NoSQL, reflexe, introspekce.}, %klicova slova v ceskem jazyce
-  keywords.en={Database, Database systems, DBMS, object database, relational database, object-relational mapping, ORM, OHM, Java Language, NoSQL, reflection, intospection.}, %klicova slova v anglickem jazyce
+  keywords.en={Database, Database systems, DBMS, object database, relational database, object-relational mapping, ORM, OHM, Java Language, NoSQL, reflection, introspection.}, %klicova slova v anglickem jazyce
   %Abstract
   abstract.cs={V této práci čtenáře seznámím se základními modely, jenž se používají pro ukládání dat v datbazových systémech. Dále čtenáři popíši způsoby ukládání objektů jazyka Java, kde mu nadále vysvětlím pojmy jako objektově relační mapování, reflexe a introspekce. Následně zde představím existující implementace, které se v jazyce Java používají pro ukládání objektových dat. Poté popíši metodiku pro testování výkonu jednotlivých řešení. Podle této metodiky provedu testování a nakonec zhodnotím získané výsledky.  
 }, % abstrakt v ceskem jazyce
@@ -131,7 +133,7 @@
 %Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.}
 
 %Podekovani (nepovinne)
-%\acknowledgment{V této sekci je možno uv ést poděkování vedoucímu práce a těm, kteří poskytli odbornou pomoc
+%\acknowledgment{V této sekci je možno uvést poděkování vedoucímu práce a těm, kteří poskytli odbornou pomoc
 %(externí zadavatel, konzultant, apod.).}
 
 \begin{document}

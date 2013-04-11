@@ -1,54 +1,71 @@
+Databázových systému (systémů řízení báze dat, zkráceně SŘBD) existuje nepřeberné množství.
+\footnote{\label{rdbms_list}\url{http://en.wikipedia.org/wiki/List_of_relational_database_management_systems}}
+\footnote{\url{http://en.wikipedia.org/wiki/List_of_object_database_management_systems}}
+Jednotlivé SŘBD můžeme můžeme dělit dle různých kritérií. Nejčastějším kritériem, dle kterého jsou SŘBD děleny, je jejich datový model.
+Ten popisuje základní strukturu dat, to jak jsou data uložena, uspořádána, jejich sémantiku, vztahy mezi daty a jejich integritní omezení. Datový model umožňuje popsat návrh databáze na její fyzické i logické úrovni.\cite[s.~945--964]{korth:dbsc}
 
-\section{Úvod}
-Potřebu zaznamenávat informace (data) má lidstvo již od nepaměti. Jedním z prvních způsobů bylo vytesávaní znaků do kamenných desek. To bylo později nahrazeno zaznamenáváním 
-na papirus ve formě svitků. Papirus časem nahradil pergamen a ten byl nahrazen papírem a místo svitků se začaly texty uchovávat ve formě volných listů případně svazků a knížek.
+Typů databází dle jejich datového modelu existuje celá řada. Já se zde omezím jen na základní čtyři, které jsou uplatněny v této práci.
 
-Uchovávaní informací je ale jen jedna část problemu. Jelikož k čemu by nám sloužily zaznamenaná data, kdybychom se vnich nedokázali orientovat, a neuměli v nich vyhledávat potřebné informace.
-Proto vznikly různé způsoby, jak jednotlivé dokumenty strukturovat (číslovaní stránek (svitků), kapitoly, rejstříky\dots). 
+\section{Entity-relationship model}
+\emph{Entity-relationship} (\textbf{E-R}) datový model využívá kolekce jednoduchých objektů, nazývaných entity, a vztahů mezi těmito entitami. Entita je abstrakcí nějaké věci nebo objektu z reálného světa, která je jednoznačně odlišitelná od ostatních objektů. 
 
-Krom orientace v samotném dokumentu, je zapotřebí mít možnost dohledávat i jednotlivé dokumenty jako celky.
-Pro tyto účely se využívá zařazení dokumentů do různých skupin (kategorií). K dělení do kategorií se pak využívá různých atributů, jimiž daný dokument disponuje.
-Mezi tyto atributy patří například název, autor, téma, datum, typ dokumentu atd. Krom zařazení do kategorie se dá využít atributů i při vyhledávání či řazení dokumentu.
+Entity-relationship datový model je široce využíván při databázovém návrhu. Výsledkem návrhu jsou diagramy, které se nazývají \emph{entity-relationship diagramy} (\textbf{ERD}).
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=40em]{obr/era}
+    \caption{Ukázka ER diagramu}
+    \label{fig:era}
+  \end{center}
+\end{figure}
+\section{Relační databáze}
+Relační databáze jsou založeny na relačním modelu a jsou v součastnosti nejvíce používanými \footnote{\label{dbms_rank}\url{http://db-engines.com/en/ranking}} SŘBD. Díky svému snadnému použití a pochopení, nahradily relační databáze své předchůdce. Předchůdci relačních databází byly datbáze síťové a hierarchické.
+\subsection{Datový model}
+Relační databáze využívají relační datový model. Ten je nejrozšířenějším používaným datovým modelem dnešení doby a velká část součastných databázových systému je založena právě na tomto datovém modelu.
 
-Předchozí odstavec si nejlépe představíme na příkladu kartotéky obvodního lékaře. Ten při hledání karty pacienta vyhledavá dle atributů uvedených v tabulce \ref{kartoteka}. Za předpokladu, že jsou jednotlivé karty pacientů rozděleny do zásuvek podle roku narození. A zásuvky jsou rozděleny do sekcím označené názvem měsíce narození. A tyto sekce se dále dělí na podsekce dle dne narození a ty jsou následně seřazeny abecdně podle přímení pacienta. Tak by postup vyhledání pacientovy karty mohl být následující.
-\begin{table}[h!]
-\begin{center}
-\begin{tabular}{|l|r|}
-\hline
-    \bfseries attribut & \bfseries hodnota\\ \hline
-    jméno pacienta & Daniel Kozák \\
-    datum narození & 23.11.1988 \\
-    adresa trvalého pobytu & Bratrušov 95 \\
-    \hline
-\end{tabular}
-\caption{Informace o pacientovy využité pro nalezení jeho karty.}
-\label{kartoteka}
-\end{center}
-\end{table}
-\newpage
-Lékař otevře zásuvku s označením ročník 1988. Zde se přesune na záložku s označením Listopad a vní se přesune na podzáložku s označením 23. Zde snadno vyhledá všechny pacienty s přímením Kozák a mezi nimy vybera pacienta s jménem Daniel a trvalým pobytem na adrese Bratrušov 95.\footnote{V tomto zjednodušeném příkladu předpokládám existenci pouze jednoho pacienta se stejným jménem, datem narození a adresou trvalého pobytu. V praxi by bylo na kartě uvedene ještě rodné číslo.}
+Relační model je založen na kolekcích tabulek, kterých se využíva jak pro reprezentaci dat (tabulky \texttt{RIDER} a \texttt{CAR} na obrázku \ref{fig:rel_model}), tak i pro vztahy mezi těmito daty (tabulka \texttt{CAR\_RIDER} na obrázku \ref{fig:rel_model}). Každá tabulka má několik sloupců, kde každý sloupec (též označován jako atribut) má svůj unikátní název (identifikátor), typ a rozsah neboli doménu.
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=40em]{obr/rel_model}
+    \caption{Relační datový model}
+    \label{fig:rel_model}
+  \end{center}
+\end{figure}
+\subsection{Dotazovací jazyk}
+Standardem pro práci s relačními datbázemi se stal jazyk \emph{\textbf{S}tructured \textbf{Q}uery \textbf{L}anguage} (\textbf{SQL}). Ačkoliv všechny hlavní relační databáze používají standardizovaný jazyk SQL, tak mezi nimi není zcela zaručena přenositelnost jednotlivých dotazů. Důvodem jsou hlavně různá rozšíření a vylepšení, kterými se od sebe různé produkty odlišují a také to, že ne všechny produkty implementují kompletní normu jazyka SQL.
 
-V předchozím příkladě by nalezení pacientovy karty trvalo několik vteřin. Což se dá brát jako dostačující, ale co v případě kdy lékař dostane za úkol nalést v této kartotéce, karty všech pacientů s trvalým pobytem v Bratrušově. V tomto případě by lékaři nezbylo nic jiného, než projít karty všech pacientů a znich vybrat ty, které mají u trvalého pobytu uvedeno Bratrušov. Toto by v závislosti na počtu pacientů mohlo lékaří či jeho sestřičce zabrat desítky minut nebo i hodin. To už není ideální doba a jediný způsob, jak tento čas zkrátit, je využít víc lidí k prohledávání kartotéky (paralerní zpracování).
+Poslední normou jazyka SQL, která se týká čistě relačních dat a operací, je norma SQL-92 (někdy se uvádí i název SQL2), tato norma aktualizovala původní normu známou pod názvem SQL-86.
+\subsection{Zástupci}
+Systémů řízení báze dat, stavějících na relačním datovém modelu, je celá řada\cref{rdbms_list}. Následující seznam zástupců je rozdělen na dvě kategorie. Na zástupce ze světa OSS a na komerční produkty. Jednotliví zástupci jsou řazeni sestupně dle jejich popularity \cref{dbms_rank}.
+\begin{enumerate}
+  \item OSS řešení
+  \begin{itemize}
+    \item MySQL
+    \item PostgreSQL
+    \item SQLite
+    \item Firebird
+  \end{itemize}
+  \item Komerční řešení
+  \begin{itemize}
+    \item Oracle
+    \item Microsoft SQL Server
+    \item Microsoft Access
+    \item Db2
+  \end{itemize}
+  
+\end{enumerate}
+\section{Objektově-relační databáze}
+S rozmachem programovacích jazyků podporujících objektově orientované programování (\emph{OOP}, bylo třeba řešit problém persistence objektů a netriviálních datových struktur. Objektově-relační databáze byly jednou z odpovědí na tento problém (další řešení je použití objektové datbáze nebo objektově relační mapování). Objektově-relační databáze jsou jen rozšířenou variantou oproti relačním databázím, tudíž většina zmíněných relačních datbází podporuje do jisté míry i objektově-relační přístup.
+\subsection{Datový model}
+Jedná se o relační model, který je rozšířený o vlastní (abstraktní) datové typy s podporu dědičnosti a metod. Dotazovací jazyk je zde upraven (rozšířen) tak, že podporuje dotazy nad těmito typy.\cite[s.~945--964]{korth:dbsc}
 
-Revolucí zaznamenávání a zpracovaní informací je jejich ukládání v elektonické formě. Zde je papír a jeho obsah nahrazen souborem ležícím na paměťovém úložišti.Vyhledávaní jednotlivých dokumentů má nastarosti souborový systém.
-\cite[s.~1--52]{korth:dbsc}
+\section{Objektové databáze}
+Objektové databáze, jak již bylo naznačeno, jsou další odpovědí na řešení problému, ukládání, vyhledávání a manipulování s daty v OOP jazycích. Oproti objektově-relačním databázím se jedná o zcela jíný přístup se zcela jiným datovým modelem, bez jakékoliv návaznosti na relační model.
 
-\section{Datové modely}
-Základní součástí databáze je její datový model, ten popisuje základní strukturu dat, to jak jsou data uložena, uspořádána, jejich sémantiku, vztahy mezi daty a jejich integritní omezení. Datový model umožňuje popsat návrh databáze na její fyzické i logické úrovni.\cite[s.~945--975]{korth:dbsc}
+\subsection{Datový model}
+Na objektově orientovaný datový model můžeme nahlížet, jako na E-R datový model, rozšířený o některé prvky OOP. Těmito prvky jsou: zapouzdření, metody (funkce), dedičnost, polymorfismus a identita objektu.
 
-Datových modelů existuje celá řada. Já se zde omezím jen na základní čtyři, které jsou uplatněny v této práci.
+\section{NoSQL databáze}
+\subsection{Semi-structured model}
+Jedná se o specialní datový model, odlišující se od ostatních datových modelů tím, že umožnuje ukládat záznamy stejného typu s odlišnou množinou atributů.
 
-\subsection{Relační model}
-Je nejrozšířenějším používaným datovým modelem dnešení doby a velká část součastných databázových systému je založena právě na tomto datovém modelu.
-
-Relační model je založen na kolekcích tabulek, kterých se využíva jak pro reprezentaci dat, tak i pro vztahy mezi těmito daty. Každá tabulka má několik sloupců, kde každý sloupec (též označován jako atribut) má svůj unikátní název (identifikátor), typ a rozsah neboli doménu.
-\subsection{Entity-relationship model}
-Entity-relationship (E-R) datový model využívá kolekce jednoduchých objektů, nazývaných entity, a vztahů mezi těmito entitami. Entita je abstrakcí nějaké věci nebo objektu z reálného světa, která je jednoznačně odlišitelná od ostatních objektů. 
-
-Entity-relationship datový model je široce využíván při databázovém návrhu. Výsledkem návrhu jsou diagramy, které se nazývají entity-relationship diagramy neboli ER diagramy (zkráceně \emph{ERD}). 
-\subsection{Objektově orientovaný model}
-\subsection{Semi-structured (Multivalue) model}
-\section{Typy datbází}
-\subsection{Relační databáze}
-\subsection{Objektově-relační databáze}
-\subsection{Objektové a NoSQL databáze}
+Nejznámějšími formáty reprezentující tento model jsou e\textbf{X}tensible \textbf{M}arkup \textbf{L}anguage (\emph{XML}) a \textbf{J}ava\textbf{S}cript \textbf{O}bject \textbf{N}otation (\emph{JSON}).
