@@ -1,3 +1,21 @@
+V předchozí kapitole jsem vás seznámil, s některými typy SŘDB a s jejich datovými modely, jenž používají pro uchovávání dat. V této kapitole vám popíši některé základní techniky, používané těmito SŘBD pro ukládání celých objektů programu.
+
+\section{Serializace}
+Serializace (někdy se můžeme setkat i s pojmem \emph{marshalling}\footnote{Slova serializace a marshalling jsou často brána jako synonyma, ale například v případě jazyka Java se jedná o dvě odlišné operace.\cite{rfc:2713}}) je nejprimitivnějším způsobem, jak v aplikaci umožnit persistenci (uložení do souboru, databáze či jakéhokoliv jiného umístění) nebo přenos (např. po síti) určitého objektu.
+
+Jedná se o proces, při němž jsou data instance objektu (datové struktury), uložené nejčastěji v operační paměti počítače, transformovány na odlišný formát dat. Tento, odlišný formát dat, musí splňovat některé podmínky:
+
+\begin{itemize}
+\item nezávislost na architektuře -- Reprezentace dat nesmí být závislá například na endianitě systému.
+\item deserializace -- Transformovaná data musí jít zase zpětně převést na původní objekt (jeho identickou kopii).
+\end{itemize}
+
+Dále je také vhodné, aby byl formát pokud možno co nejkompaktnější (menší přenos dat po síti a menší obsazený prostor v paměti).
+
+Často používanými formáty pro serializaci jsou XML a JSON. Pro kompaktnost se někdy můžeme setkat i s jejich binarními variantami s binarním XML (EXI \cite{w3c:exi}, EBML \cite{rfc:ebml}) a s binárním JSON-em (BSON \cite{bson:spec}). Dalším populárním formátem primárně určeném pro serializaci je \textbf{YAML} \cite{rfc:yaml} (\emph{\textbf{Y}AML \textbf{A}in’t \textbf{M}arkup \textbf{L}anguage}, dříve používán název \emph{Yet Another Markup Language}).
+
+Při serializaci/deserializaci je třeba řešit také problém referencí na jiné objekty. To se řeší pomocí tzv. swizzlingu (přeskládávání \cite{wiki:swizz}).
+
 \section{Objektově relační mapovaní}
 
 \section{Přímé ukládání objektů do databáze}

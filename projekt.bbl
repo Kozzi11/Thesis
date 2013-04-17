@@ -8,6 +8,20 @@
 \providecommand{\selectlanguage}[1]{\relax}
 \providecommand{\eprint}[2][]{\url{#2}}
 
+\bibitem{bson:spec}
+Binary JSON. [online].
+\newline\urlprefix\url{http://bsonspec.org/#/specification}
+
+\bibitem{wiki:swizz}
+Pointer swizzling. In \emph{Wikipedia: the free encyclopedia} [online], San
+  Francisco (CA): Wikimedia Foundation, 31.12.2012.
+\newline\urlprefix\url{http://en.wikipedia.org/wiki/Pointer_swizzling}
+
+\bibitem{rfc:yaml}
+Ben-Kiki, O.; Evans, C.; döt Net, I.: YAML Ain’t Markup Language (YAML™).
+  [online], Říjen 2009.
+\newline\urlprefix\url{http://yaml.org/spec/1.2/spec.html}
+
 \bibitem{odmg}
 Berler, M.; Eastman, J.; Jordan, D.; aj.: The Object Data Standard: ODMG 3.0.
   In \emph{Data Management Systems}, editace R.~G. Cattell; D.~K. Barry
@@ -45,6 +59,10 @@ Kivity, A.; Kamay, Y.; Laor, D.; aj.: kvm: the Linux Virtual Machine Monitor.
   2007.
 \newline\urlprefix\url{http://www.linux-kvm.com/sites/default/files/kivity-Reprint.pdf}
 
+\bibitem{rfc:ebml}
+Nilsson, M.: Extensible Binary Markup Language. [online], Březen 2004.
+\newline\urlprefix\url{http://matroska.org/technical/specs/rfc/index.html}
+
 \bibitem{donahue:jdpb}
 O'Donahue, J.: \emph{Java Database Programming Bible}, kapitola~4. John Wiley
   \& Sons, první vydání, Červenec 2002, ISBN 978-0764549243, str. 702.
@@ -52,6 +70,16 @@ O'Donahue, J.: \emph{Java Database Programming Bible}, kapitola~4. John Wiley
 \bibitem{roos:jdo}
 Roos, R.: \emph{Java Data Objects}. Pearson Education, první vydání, Říjen
   2002, ISBN 978-0321123800, 272 s.
+
+\bibitem{rfc:2713}
+Ryan, V.; Seligman, S.; Lee, R.: Schema for Representing Java™ Objects in an
+  LDAP Directory. [online], Říjen 1999.
+\newline\urlprefix\url{http://tools.ietf.org/html/rfc2713}
+
+\bibitem{w3c:exi}
+Schneider, J.; Kamiya, T.: Efficient XML Interchange (EXI) Format 1.0.
+  [online], Březen 2011.
+\newline\urlprefix\url{http://www.w3.org/TR/2011/REC-exi-20110310/}
 
 \bibitem{korth:dbsc}
 Silberschatz, A.; Korth, H.~F.; Sudarshan, S.: \emph{Database System Concepts}.
