@@ -51,7 +51,6 @@ Systémů řízení báze dat, stavějících na relačním datovém modelu, je 
     \item Microsoft Access
     \item Db2
   \end{itemize}
-  
 \end{enumerate}
 \section{Objektově-relační databáze}
 S rozmachem programovacích jazyků podporujících objektově orientované programování (\emph{OOP}, bylo třeba řešit problém persistence objektů a netriviálních datových struktur. Objektově-relační databáze byly jednou z odpovědí na tento problém (další řešení je použití objektové datbáze nebo objektově relační mapování). Objektově-relační databáze jsou jen rozšířenou variantou oproti relačním databázím, tudíž většina zmíněných relačních datbází podporuje do jisté míry i objektově-relační přístup.
@@ -64,8 +63,50 @@ Objektové databáze, jak již bylo naznačeno, jsou další odpovědí na řeš
 \subsection{Datový model}
 Na objektově orientovaný datový model můžeme nahlížet, jako na E-R datový model, rozšířený o některé prvky OOP. Těmito prvky jsou: zapouzdření, metody (funkce), dedičnost, polymorfismus a identita objektu.
 
+\subsection{Dotazovací jazyk}
+Narozdíl od relačních a objektově-relačních databází, zde neexistuje jednotný normalizovaný jazyk, pro práci s uloženými daty. Což hodnotím jako jedno z největších úskalí u tohoto typu databází. A zřejmě je to i jeden z hlavních důvodů proč se objektové databáze teší menší popularitě než relační databázové systémy podporující SQL.
+ 
+\subsection{Zástupci}
+Oproti relačním databázím, existuje podstatně méně produktů využívajících objektový datový model. Následuje přehled některých z nich.
+\begin{enumerate}
+  \item OSS řešení
+  \begin{itemize}
+    \item Db4o
+    \item NeoDatis
+    \item ZODB
+  \end{itemize}
+  \item Komerční řešení
+  \begin{itemize}
+    \item Caché
+    \item Objectivity/DB
+    \item ObjectDB
+    \item Versant Object Database
+    \item JADE
+  \end{itemize}
+\end{enumerate}
+
 \section{NoSQL databáze}
-\subsection{Semi-structured model}
+NoSQL databáze není jeden určitý druh databáze, ale označuje se tak celá skupina databází, která nestaví na relačním modelu dat, a kde jednotlivé databáze negarantují všechny ACID vlastnosti. Mezi NoSQL databáze by se daly zařadit i objektově orientované databáze.
+
+Zkratka NoSQL se někdy pojí s pojmem "`Not Only SQL"', čímž se dává najevo, že některé z NoSQL databází podporují i SQL dotazy.
+
+\subsection{Datový model}
+Jelikož je NoSQL pojmem zastřešujícím celou řadou ruzných datábází s určitými společnými vlastnostmi, neexistuje zde pouze jen jeden datový model, ale existuje jich hned několik. Ale pro zjednodušení se dají všechny tyto datové modely označit jako semi-structured datový model.
+\subsubsection{Semi-structured}
 Jedná se o specialní datový model, odlišující se od ostatních datových modelů tím, že umožnuje ukládat záznamy stejného typu s odlišnou množinou atributů.
 
 Nejznámějšími formáty reprezentující tento model jsou e\textbf{X}tensible \textbf{M}arkup \textbf{L}anguage (\emph{XML}) a \textbf{J}ava\textbf{S}cript \textbf{O}bject \textbf{N}otation (\emph{JSON}).
+
+\subsection{Dotazovací jazyk}
+Platí zde to samé co u objektových databází, tedy že zde neexistuje jednotný normalizovaný jazyk - způsob jak k datům přistupovat, či je modifikovat. Vyjímkou jsou některé NoSQL databáze, které podporují i SQL jazyk. A je tedy možno s danou datbází a jejími daty pracovat pomocí SQL dotazů.
+
+\subsection{Zástupci}
+NoSQL databází existuje velké množství. Mezi nejznámější patří tyto:
+\begin{itemize}
+  \item MongoDB -- dokumentová databáze (BSON)
+  \item Cassandra -- wide column store 
+  \item Redis -- asociativní pole
+  \item HBase -- wide column store 
+  \item CouchDB -- dokumentová databáze (JSON)
+  \item Neo4j -- grafová databáze
+\end{itemize}
