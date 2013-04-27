@@ -1,6 +1,18 @@
+Je třídně založený, objektově orientovaný a víceúlohový obecný programovací jazyk, který byl vyvinut firmou Sun Microsystems. Ta jej v roce 2007 uvolnila pod svobodnou licencí GNU GPL. V dnešní době je jazyk vyvíjen zejména firmou Oracle Corporation Inc., která firmu Sun Microsystems odkoupila.
+
+Syntaxe Javy je odvozena z jazyků C a C++, kterým je díky tomu v mnoha ohledech podobná. Ale narozdíl od těchto jazyků se zbavila konstrukcí, které často vedli k (bezpečnostním) chybám. Jedná se hlavně o konstrukce umožňující přímou práci s pamětí (ukazatele), o příkaz goto a také o beznaménkové datové typy. Díky tomu, a silné typové kontrole, jsou programy méně náchylné na bezpečnostní chyby.
+
+Ruční správu paměti zde nahrazuje automatická správa. Tu zajišťuje garbage collector, což je proces vyhledávající (sbírající) již nedostupnou alokovanou paměť (odpad), kterou následně uvolní, aby mohla být znovu použita.
+
+Další, včem se Java od jazyka C a C++ odlišuje, je to, že se výsledný program nekompiluje přímo na instrukční sadu dané architektury, ale do mezijazyka tzv. bytekódu (soubory s příponou \texttt{.class}). Ty jsou teprve následně "`interpretovány"' pomocí JVM (\emph{\textbf{J}ava \textbf{V}irtual \textbf{M}achine}).
+
+Automatická správa paměti a interpretovaný běh vedl, zejména v historii, k pomalejšímu běhu výsledné aplikace. Pomalost způsobená garbage collectorem, se postupně ,s vynalézáním lepších a rychlejších algoritmů, podařila minimalizovat.
+
+Výkonnostní problém, související s interpretací, vylepšila technika zvaná JIT (\emph{Just-in-Time}) kompilace (kompilace v době běhu). Jedná se o techniku, která dle statistiky kompiluje vhodné části kódu přímo do instrukční sady daného stroje. Tyto části kódu se při opakovaném použití znovu neinterpretují, ale jsou provedeny přímo.
+
+Výhoda JIT kompilace se projeví nejvíce u déle běžících aplikací, kde se vykonává stejný kód dokola. Proto, a kvůli nutnosti načíst celý JVM při startu aplikace, je použití jazyka Java na malé a krátce běžící aplikce nevhodné a neefektivní.
 \subsection{Využití}
 \subsection{Vlastnosti}
 \subsubsection{Anotace}
-\subsubsection{Introspekce}
-\subsubsection{Reflexe}
+\subsubsection{Reflexe a introspekce}
  
