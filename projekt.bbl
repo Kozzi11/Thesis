@@ -43,21 +43,10 @@ Fisher, M.; Ellis, J.; Bruce, J.: JDBC™ API Tutorial and Reference. The Java
   Series..from the Source™, Prentice Hall, třetí vydání, Červen 2003,
   ISBN 978-0321173843, str. 1280.
 
-\bibitem{huynh:kvm}
-Huynh, K.; Hajnoczi, S.: KVM / QEMU Storage Stack Performance Discussion. In
-  \emph{Linux Plumbers Conference}, IBM Corporation, 2010.
-\newline\urlprefix\url{http://www.tdeig.ch/kvm/pasche/43_Storage.pdf}
-
 \bibitem{jordan:jdo}
 Jordan, D.; Russel, C.: \emph{Java Data Objects}. 1005 Gravenstein Highway
   North, Sebastopol, CA 95472: Packt Publishing, první vydání, Duben 2003,
   ISBN 978-0596002763, 380 s.
-
-\bibitem{kivity:kvm}
-Kivity, A.; Kamay, Y.; Laor, D.; aj.: kvm: the Linux Virtual Machine Monitor.
-  In \emph{Proceedings of the Linux Symposium}, Ottawa, Ontario Canada, June
-  2007.
-\newline\urlprefix\url{http://www.linux-kvm.com/sites/default/files/kivity-Reprint.pdf}
 
 \bibitem{rfc:ebml}
 Nilsson, M.: Extensible Binary Markup Language. [online], Březen 2004.

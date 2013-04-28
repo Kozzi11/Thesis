@@ -25,6 +25,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{url}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{listings}
 \usepackage{alltt}
 \renewcommand{\ttdefault}{txtt}
@@ -64,20 +66,24 @@
   \definecolor{links}{rgb}{0.4,0.5,0}
   \definecolor{anchors}{rgb}{1,0,0}
   \definecolor{gray}{rgb}{0.4,0.4,0.4}
+  \definecolor{javared}{rgb}{0.6,0,0} % for strings
+  \definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+  \definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+  \definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
   \def\AnchorColor{anchors}
   \def\LinkColor{links}
   \def\pdfBorderAttrs{/Border [0 0 0] }  % bez okrajů kolem odkazů
   \pdfcompresslevel=9
-  \lstset{ %
-    basicstyle=\ttfamily,
-    keywordstyle=\color{links}\bfseries,
-    identifierstyle=\ttfamily,
-    commentstyle=\color{gray}\ttfamily,
-    stringstyle=\color{anchors}\ttfamily,
-    morekeywords={*,rm,mkdir,chmod,make,cp,patch,pkgname,pkgver,
-                  pkgrel,pkgdesc,arch,url,license,depends,makedepends,
-                  conflicts,provides,md5sums},
-    showstringspaces=false
+  \lstset{language=Java,
+      basicstyle=\ttfamily,
+      keywordstyle=\color{javapurple}\bfseries,
+      stringstyle=\color{javared},
+      commentstyle=\color{javagreen},
+      morecomment=[s][\color{javadocblue}]{/**}{*/},
+      numbersep=10pt,
+      tabsize=4,
+      showspaces=false,
+      showstringspaces=false
   }
 \fi
 \fi

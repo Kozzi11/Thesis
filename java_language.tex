@@ -11,8 +11,47 @@ Automatická správa paměti a interpretovaný běh vedl, zejména v historii, k
 Výkonnostní problém, související s interpretací, vylepšila technika zvaná JIT (\emph{Just-in-Time}) kompilace (kompilace v době běhu). Jedná se o techniku, která dle statistiky kompiluje vhodné části kódu přímo do instrukční sady daného stroje. Tyto části kódu se při opakovaném použití znovu neinterpretují, ale jsou provedeny přímo.
 
 Výhoda JIT kompilace se projeví nejvíce u déle běžících aplikací, kde se vykonává stejný kód dokola. Proto, a kvůli nutnosti načíst celý JVM při startu aplikace, je použití jazyka Java na malé a krátce běžící aplikce nevhodné a neefektivní.
-\subsection{Využití}
-\subsection{Vlastnosti}
-\subsubsection{Anotace}
-\subsubsection{Reflexe a introspekce}
+
+\subsection{Reflexe a introspekce}
+Jednou ze zajímavých vlastností jazyka Java je reflexe. Ta umožňuje prozkoumávat a modifikovat strukturu a chování (například proměnné, atributy, metadata a funkce) objektu přímo za běhu \ref{code:java:reflection}.
+To je velmi užitečné zejména pro různe frameworky a reflexe se také hojně využíva při metaprogramování. 
+\begin{figure}[!h]
+\begin{lstlisting}
+public class User {
+    /*
+     ... Some fields declaration ...
+    */
+    public String getName() {
+        return this.name;
+    }
+    
+    public void printName() {
+        // Get name with reflection
+        Class<?> c = this.class;
+        System.out.println(c.getMethod("getName").invoke(this));
+    }
+}
+\end{lstlisting}
+\caption{Volání metody pomocí reflexe.}
+\label{code:java:reflection}
+\end{figure}
+
+Jedná se o pokročilou vlastnost jazyka, jenž umožňuje provádět operace, které by jinak nebylo možné provádět. Umožňuje obejití zapouzdření (zpřístupňuje privátné členy) a nese tedy riziko narušení správného běhu programu. Díky tomu, a kvůli nemalé režii navíc, by měla být reflexe používána co nejméně a jen lidmi s dostatečnými znalostmi.
+
+Introspekce využíva relexe a umožňuje získání informací o objektu, jako je například seznam všech funkcí, atributů, implementovaných rozhraní nebo název třídy \ref{code:java:introspection}.
+\begin{figure}[!h]
+\begin{lstlisting}
+String someObject = "Some text";
+// This print "String"
+System.out.println(someObject.getClass().getName());
+\end{lstlisting}
+\caption{Výpis názvu třídy pomocí introspekce.}
+\label{code:java:introspection}
+\end{figure}
+\subsection{Bytecode enhancement}
+Podobné možnosti jako reflexe nám nabízí i bytecode enhancement. Jedná se o process, při kterém se přímo modifukuje výsledný "`bajtkód"' (obsah souboru s příponou \texttt{.class}), a který se narozdíl od reflexe neprovádí stále dokola v každém běhu, ale pouze jen jednou, a to buď po kompilaci nebo při prvním načtení třídy. Z toho vyplývá hlavní výhoda oproti reflexi, kterou je rychlost a celkově malá režie navíc. Nadruhou stranu jeho aplikování je složitější a náročnejší, než je v případě reflexe.
+
+
+\subsection{Anotace}
+
  
