@@ -49,9 +49,109 @@ System.out.println(someObject.getClass().getName());
 \label{code:java:introspection}
 \end{figure}
 \subsection{Bytecode enhancement}
-Podobné možnosti jako reflexe nám nabízí i bytecode enhancement. Jedná se o process, při kterém se přímo modifukuje výsledný "`bajtkód"' (obsah souboru s příponou \texttt{.class}), a který se narozdíl od reflexe neprovádí stále dokola v každém běhu, ale pouze jen jednou, a to buď po kompilaci nebo při prvním načtení třídy. Z toho vyplývá hlavní výhoda oproti reflexi, kterou je rychlost a celkově malá režie navíc. Nadruhou stranu jeho aplikování je složitější a náročnejší, než je v případě reflexe.
+Podobné možnosti jako reflexe nám nabízí i bytecode enhancement. Jedná se o process, při kterém se přímo modifukuje výsledný "`bajtkód"' (obsah souboru s příponou \texttt{.class}), a který se narozdíl od reflexe neprovádí stále dokola v každém běhu, ale pouze jen jednou, a to buď po kompilaci nebo při prvním načtení třídy.
+
+Z toho vyplývá hlavní výhoda oproti reflexi, kterou je rychlost a celkově malá režie navíc. Nadruhou stranu je implementace složitější a náročnejší, než je v případě reflexe.
+
+Existuje několik knihoven (frameworků), které umožňují a usnadňují bytecode enhancement. Mezi nejznámější patří tyto tři:
+\begin{itemize}
+  \item ASM (\url{http://asm.ow2.org/})
+  \item BCEL (\url{http://commons.apache.org/proper/commons-bcel/})
+  \item Javassist (\url{http://www.csg.is.titech.ac.jp/~chiba/javassist/})
+\end{itemize}
 
 
 \subsection{Anotace}
+Jednou z velmi zajímavých a užitečných vlastností jazyka Javy je podpora anotací. Jedná se o speciální druh metadat, které by se dali přirovnat k dokumentačním komentářům. S tím rozdílem, že na anotace je možno se dotazovat pomocí reflexního API.
 
- 
+Samotné anotace nijak přímo neovlivňují činnost kódu, který je nimi anotován a mohou jím být předávány parametry. Mají široké využití a zejména se využívají pro:
+\begin{itemize}
+  \item Dodatečné informace pro kompilátor -- Kompilátor může využít informací z anotací k detekci či potlačení chyb.
+  \item Zpracování v době kompilace či nasazení -- Nástroje mohou zpracovávat anotace a využít je ke generování například XML souborů a podobně.
+  \item Zpracování v době běhu (runtime) -- Některé anotace mohou být zprístupněny a využity přímo v době běhu samotné aplikace.
+\end{itemize}
+
+Jazyk Java poskytuje několik vestavěných anotací, které se dají rozdělit do dvou skupin. Na anotace aplikované na kód a na anotace aplikované na jiné anotace.
+\begin{description}
+  \item[Anotace aplikované na kód]\hfill
+  \begin{itemize}
+     \item \texttt{@Override} -- Kontroluje zda daná metoda opravdu přepisuje metodu některé ze svých nadřazených tříd. Varování při kompilaci, pokud tomu tak není.
+     \item \texttt{@Deprecated} -- Označuje anotovanou metodu jako "`zastaralou"'. Použití takovéto metody způsobuje varování při kompilaci.
+     \item \texttt{@SuppressWarnings} -- Potlačuje některá varování během kompilace. To která varovaní se mají potlačit je určeno parametrem této anotace.
+     \item \texttt{@SafeVarargs} -- Využívá se u metod či konstruktorů, u kterých zakazuje používaní potencionálně nebezpečných operací nad daným \texttt{varargs} parametrem. Jakákoliv varování typu \texttt{"unchecked"}, související s operacemi nad \texttt{varargs} jsou zde automaticky potlačena.
+     \item \texttt{@FunctionalInterface} -- Tato anotace byla přidána do Javy SE 8, indikuje že deklarace typu by měla být rozhraním funkce.
+  \end{itemize} 
+  \item[Anotace aplikované na jiné anotace] (meta anotace)\hfill
+  \begin{itemize}
+    \item \texttt{@Retention} -- Určuje způsob uložení anotace. Zda bude pouze součástí kódu, nebo se skompiluje do výsledného \texttt{.class} soboru a nebo bude dostupná za běhu skrze reflexi.
+    \item \texttt{@Documented} -- Využívá se pro zahrnutí anotace do dokumentace.
+    \item \texttt{@Target} -- Omezuje rozsah platnosti, na co může být anotace aplikována (třída, metoda \ldots).
+    \item \texttt{@Inherited} -- Anotace se dědí do odvozených tříd.
+    \item \texttt{@Repeatable} -- Anotaci je možno na jeden element aplikovat vícekrát (např. s rúznými parametry). Tato anotace je součástí Javy 8 SE.
+  \end{itemize}
+\end{description}
+
+Použití anotací je snadné, stačí jen požadovanou anotací uvést--napsat před prvek, který chceme anotovat. Anotovat můžeme například třídy, metody, proměnné, parametry nebo balíčky.
+Na ukázce kódu \ref{code:ann:bultin} vydíme základní použití vestavěnné anotace.
+\begin{figure}[!h]
+\begin{lstlisting}
+public class Shape {
+    public long getArea() {
+        return 0;
+    }
+    
+    public long getPerimeter() {
+        return 0;
+    } 
+}
+
+public class Square extends Shape {
+    int edge = 5;
+    
+    @Overrride
+    public long getArea() {
+        return 4 * edge;
+    }
+    
+    @Overrride
+    public long getPerimeter() {
+        return edge * edge;
+    }
+}
+\end{lstlisting}
+\caption{Ukázka použití vestavěnné anotace \texttt{@Override}.}
+\label{code:ann:bultin}
+\end{figure}
+
+Krom vestavěných anotací Java podporuje i obecné uživatelsky definované anotace. Ty se deklarují podobně jako rozhraní za pomocí klíčového slova \texttt{@interface} (oproti deklaraci rozhraní je zde navíc zavináč). Na výpise \ref{code:ann:ud} můžeme vidět jednoduchý příklad deklarace uživatelské anotace (\ref{code:ann:ud:run:dec}) a její použití (\ref{code:ann:ud:run:use}). Tato jednoduchá anotace je dostupná za běhu (RetentionPolicy.RUNTIME), nese název \texttt{Element} a má jeden parametr \texttt{value} typu \texttt{String}. 
+\begin{figure}
+\begin{subfigure}[b]{1\textwidth}
+\caption{Deklarace runtime anotace s jedním parametrem.}
+\label{code:ann:ud:run:dec}
+\begin{lstlisting}
+@Retention(value=RetentionPolicy.RUNTIME)
+@Target(value=ElementType.TYPE)
+public @interface Element {
+    String value(); 
+}
+\end{lstlisting}
+\end{subfigure}
+\begin{subfigure}[b]{1\textwidth}
+\caption{Použití vlastní anotace s parametrem.}
+\label{code:ann:ud:run:use}
+\begin{lstlisting}
+public class SomeClass {
+   @Element(value="MyElement")
+   int someVariable;
+   /* 
+    * If annotation has only one parameter
+    * and it is called value. We can ommit
+    * parameter name.
+    */
+   @Element("MyOtherElement")
+   int someOtherVariable;
+}
+\end{lstlisting}
+\end{subfigure}
+\caption{Ukázka kódu uživatelsky definované anotace}\label{code:ann:ud}
+\end{figure}
