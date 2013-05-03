@@ -1,1 +1,41 @@
+V předchozí části jsem stručně představil jazyk Java a některé jeho vlastnosti, které nějak souvisí s možností ukládání objektů jazyka Java do databáze. V této části se zaměřím na specifikace, jenž popisují způsob, jak ukládat data do databáze a definují API, které se pro tyto účely má používat. 
 
+\subsection{JDBC\texttrademark}
+JDBC někdy též označováno jako \textit{Java Database Connectivity} je základní aplikační rozhraní (API) jazyka Java pro přístup k relačním databázím. Přesněji pro přístup k jakýmkoliv tabulkovým datům, jelikož JDBC podporuje například i soubory obsahující tabulková data \cite{fisher:jdbc,donahue:jdpb}.
+
+JDBC se skládá z množství tříd a rozhraní umožňující jednotý přístup k relačním datům a provádění (SQL) dotazů nad nimy. Základní tři funkce, které JDBC nabízí jsou:
+\begin{itemize}
+  \item Připojení k databázi nebo libovolném zdroji tabulkových dat.
+  \item Poslání SQL dotazu na zdroj dat.
+  \item Zpracování výsledku dotazu.
+\end{itemize}
+
+Jednoduchý příklad těchto tří funkcí za použití JDBC API jsem znázornil na ukázce kódu \ref{jdbc:conn}.
+\begin{figure}
+\begin{lstlisting}
+// Connect to datbase with login: 'user' and password: 'pass'.
+Connection connection = 
+  DriverManager.getConnection("jdbc:driver:db", "user", "pass");
+// Prepare statement.
+Statement stmt = connection.createStatement();
+// Run query over data source.
+ResultSet rs = 
+  stmt.executeQuery("SELECT intVal, stringVal FROM TableName");
+// Iterate over results.
+while (rs.next()) {
+    int intVal = rs.getInt("intVal");
+    String stringVal = rs.getString("stringVal");
+}
+\end{lstlisting}
+\caption{Základního použití JDBC API.}
+\label{jdbc:conn}
+\end{figure}
+
+
+Výhodou aplikace používající JDBC API je možnost přistupovat jednotně k libovolnýmu zdoji dat na libovolné platformě, kde běží JVM. Jinak řečeno, s JDBC API není třeba pro každou odlišnou relační databázi (MySql, PostgreSQL, Oracle atd.) psát vlastní verzi aplikace, ale postačí pouze jedna aplikace využívající JDBC API. A díky JVM bude možné použít stejnou verzi aplikace i na odlišných platformách.
+\subsection{Java Data Objects}
+\cite{jordan:jdo,roos:jdo,tyagi:cjdo,ezzio:uujdo}
+\subsection{Java Persistence API}
+\cite{jpa:spec}
+\subsection{Object Data Management Group}
+\cite{odmg}
