@@ -1,6 +1,6 @@
 V předchozí části jsem stručně představil jazyk Java a některé jeho vlastnosti, které nějak souvisí s možností ukládání objektů jazyka Java do databáze. V této části se zaměřím na specifikace, jenž popisují způsob, jak ukládat data do databáze a definují API, které se pro tyto účely má používat. 
 
-\subsection{JDBC\texttrademark}
+\subsection{\jdbc}
 JDBC někdy též označováno jako \textit{Java Database Connectivity} je základní aplikační rozhraní (API) jazyka Java pro přístup k relačním databázím. Přesněji pro přístup k jakýmkoliv tabulkovým datům, jelikož JDBC podporuje například i soubory obsahující tabulková data \cite{fisher:jdbc,donahue:jdpb}.
 
 JDBC se skládá z množství tříd a rozhraní umožňující jednotý přístup k relačním datům a provádění (SQL) dotazů nad nimy. Základní tři funkce, které JDBC nabízí jsou:
@@ -34,7 +34,10 @@ while (rs.next()) {
 
 Výhodou aplikace používající JDBC API je možnost přistupovat jednotně k libovolnýmu zdoji dat na libovolné platformě, kde běží JVM. Jinak řečeno, s JDBC API není třeba pro každou odlišnou relační databázi (MySql, PostgreSQL, Oracle atd.) psát vlastní verzi aplikace, ale postačí pouze jedna aplikace využívající JDBC API. A díky JVM bude možné použít stejnou verzi aplikace i na odlišných platformách.
 \subsection{Java Data Objects}
-\cite{jordan:jdo,roos:jdo,tyagi:cjdo,ezzio:uujdo}
+\emph{Java Data Object} (\textbf{JDO}) poskytuje rozhraní pro transparentní persistenci objektového modelu jazyka Java u transakčních datových úložišť. To umožňuje definovat objektový model, využívající všech dovedností poskytovaných jazykem Java, a zajistit namapování dat modelu na různorodá datová úložiště. Díky čemuž není třeba znát a učit se odlišný jazyk pro datové modelování, jako je například jazyk SQL.\cite{jordan:jdo}.
+
+Jinýmy slovy, JDO je definice rozhraní pro persistenci objektů v jazyce Java, která popisuje způsob ukládání, dotazování a získávání objektů z datového úložiště. To vše se provádí transparentně, takže není třeba nijak modifikovat třídy a je možné požívat stejný kód nad různými typy datových úložišť (relační databáze, objektové databáze, souborové systémy a XML soubory)\cite{roos:jdo}.
+\cite{tyagi:cjdo,ezzio:uujdo}
 \subsection{Java Persistence API}
 \cite{jpa:spec}
 \subsection{Object Data Management Group}
