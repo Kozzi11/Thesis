@@ -30,13 +30,13 @@ Berler, M.; Eastman, J.; Jordan, D.; aj.: The Object Data Standard: ODMG 3.0.
 \newline\urlprefix\url{http://www.odbms.org/odmg/OG/book.aspx}
 
 \bibitem{jpa:spec}
-DeMichiel, L.: JSR 317: JavaTM Persistence API, Version 2.0. [online], Prosinec
-  2009.
-\newline\urlprefix\url{http://download.oracle.com/otndocs/jcp/persistence-2.0-fr-eval-oth-JSpec/}
+DeMichiel, L.: JSR 338: JavaTM Persistence API, Version 2.1. [online], Únor
+  2013.
+\newline\urlprefix\url{http://download.oracle.com/otndocs/jcp/persistence-2_1-pfd-spec/index.html}
 
 \bibitem{ezzio:uujdo}
-Ezzio, D.: \emph{Using and Understanding Java Data Objects}. Apress, první
-  vydání, Červen 2003, ISBN 978-1590590430, 456 s.
+Ezzio, D.: \emph{Using and Understanding Java Data Objects}, kapitola~1.
+  Apress, první vydání, Červen 2003, ISBN 978-1590590430, str. 456.
 
 \bibitem{fisher:jdbc}
 Fisher, M.; Ellis, J.; Bruce, J.: JDBC™ API Tutorial and Reference. The Java
@@ -47,6 +47,10 @@ Fisher, M.; Ellis, J.; Bruce, J.: JDBC™ API Tutorial and Reference. The Java
 Jordan, D.; Russel, C.: \emph{Java Data Objects}. 1005 Gravenstein Highway
   North, Sebastopol, CA 95472: Packt Publishing, první vydání, Duben 2003,
   ISBN 978-0596002763, 380 s.
+
+\bibitem{projpa2}
+Keith, M.; Schincariol, M.: \emph{Pro JPA 2: Mastering the Java™ Persistence
+  API}. Apress, první vydání, Prosinec 2009, ISBN 978-1430219569, 500 s.
 
 \bibitem{rfc:ebml}
 Nilsson, M.: Extensible Binary Markup Language. [online], Březen 2004.
@@ -75,8 +79,8 @@ Silberschatz, A.; Korth, H.~F.; Sudarshan, S.: \emph{Database System Concepts}.
   McGraw-Hill, 6 vydání, 2010, ISBN 978-0073523323.
 
 \bibitem{tyagi:cjdo}
-Tyagi, S.; McCammon, K.; Vorburger, M.; aj.: \emph{Core Java Data Objects}. 901
-  San Antonio Road, Palo Alto, California: Prentice Hall, první vydání,
-  Září 2003, ISBN 978-0131407312, 576 s.
+Tyagi, S.; McCammon, K.; Vorburger, M.; aj.: \emph{Core Java Data Objects},
+  kapitola~3. 901 San Antonio Road, Palo Alto, California: Prentice Hall,
+  první vydání, Září 2003, ISBN 978-0131407312, str. 576.
 
 \end{thebibliography}

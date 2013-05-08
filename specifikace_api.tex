@@ -33,12 +33,83 @@ while (rs.next()) {
 
 
 Výhodou aplikace používající JDBC API je možnost přistupovat jednotně k libovolnýmu zdoji dat na libovolné platformě, kde běží JVM. Jinak řečeno, s JDBC API není třeba pro každou odlišnou relační databázi (MySql, PostgreSQL, Oracle atd.) psát vlastní verzi aplikace, ale postačí pouze jedna aplikace využívající JDBC API. A díky JVM bude možné použít stejnou verzi aplikace i na odlišných platformách.
+
+\subsection{Object Data Management Group}
+\emph{Object Data Management Group} (ODMG) byla skupina založena za účelem vytvoření specifikace a standardizace pro persistenci objektů. Tato persistence měla být přenositelná a tudíž nezávislá na paltformě a zvoleném OOP jazyku. Specifikace pokrývala jak přímo objektové databáze, tak i ORM řešení.
+
+Za dobu svojí existence vydala tato skupina několik specifikací. Tou poslední byla specifikace \emph{The Object Data Standard: ODMG 3.0}\cite{odmg}. Po této specifikaci byla skupina rozpuštěna. Základními body této specifikace byly:
+\begin{itemize}
+  \item Object Model
+  \item Object Specification Languages
+  \item Object Query Language (OQL)
+  \item C++ Language Binding
+  \item Smalltalk Language Binding
+  \item Java Language Binding
+\end{itemize}
+
+Tato specifikace se ve světě objektových databází a ORM řešení příliš neujala. Několik komerčních objektových databází sice prohlašovalo kompatibilitu s touoto specifikací, ale často se jednalo jen o podporu některých bodů této specifikace. Ve svetě jazyka Javy byla ODMG specifikace nahrazena spefikicí \emph{Java Data Objects} (JDO). JDO částečně vycházela právě z ODMG specifikace, ale narozdíl od ODMG se zaměřuje čistě jen na podporu jazyka Java.
+
+\subsection{Enterprise JavaBeans}
+\emph{Enterprise JavaBeans} (EJB) je část API, které je součástí \emph{Java Platform, Enterprise Edition} (Java EE, dříve označovaná jako \emph{Java 2 Enterprise Edition} nebo J2EE).
+
+Kromě věcí jako je transakční zpracování nebo bezpečnost, poskytuje EJB API podporu pro persistenci objektů (nazývaných entity beans).
+
+Tato podpora persistence byla v první verzi EJB příliš složitá a komplikovaná. Dalo by se říci, že při tvorbě této specifikace, přemýšleli její tvůrci až příliš moc abstraktně. Což ironicky vedlo k tomu, že tato komplikovaná a složitá specifikace neřešila některé základní problémy persistence. Občas se říká, že persistence v první verzi EJB specifikace se stala lékem na neexistující nemoc.
+
+Velkou část problému persistence vyřešila druhá verze specifikace EJB (EJB 2.0). Problémem však nadále zůstávala složitost, která byla i nadále hodně velká. Tu měly částečně řešit pomocné nástroje, ale jejich vývoj byl velmi pomalý. Takže vývojáři řešili komplexitu EJB stále dokola, bez výhledu na lepší zítřky.
+
+To bylo částečně i důvodem pro vznik dalších proprietárních řešení a specifikací pro persistenci (TopLink, Hibernate, JDO atd.).
+
 \subsection{Java Data Objects}
 \emph{Java Data Object} (\textbf{JDO}) poskytuje rozhraní pro transparentní persistenci objektového modelu jazyka Java u transakčních datových úložišť. To umožňuje definovat objektový model, využívající všech dovedností poskytovaných jazykem Java, a zajistit namapování dat modelu na různorodá datová úložiště. Díky čemuž není třeba znát a učit se odlišný jazyk pro datové modelování, jako je například jazyk SQL.\cite{jordan:jdo}.
 
 Jinýmy slovy, JDO je definice rozhraní pro persistenci objektů v jazyce Java, která popisuje způsob ukládání, dotazování a získávání objektů z datového úložiště. To vše se provádí transparentně, takže není třeba nijak modifikovat třídy a je možné požívat stejný kód nad různými typy datových úložišť (relační databáze, objektové databáze, souborové systémy a XML soubory)\cite{roos:jdo}.
-\cite{tyagi:cjdo,ezzio:uujdo}
+
+Podrobnější informace o JDO, jak funguje\cite{ezzio:uujdo} a jak se používá\cite{tyagi:cjdo} si můžou zájemci přečíst z některých knih co o JDO byly napsány.
+
+Stejně jako ODMG se tato specifikace ve světě Javy příliš neuchytila, ačkoliv se objevilo několik řešení od různých poskytovatelů a dokonce vznikly i některé otevřené implementace. Tak do dnešní doby jich přežilo jen velmi málo. Seznam aktivně vyvíjených JDO implementací v dnešní době:
+\begin{itemize}
+  \item DataNucleus -- Otevřená referenční implementace JDO (JDO 3.1).
+  \item ObjectDB -- Komerční řešení , možnost omezeného využití zdarma (JDO 2.0\footnote{Na podpoře JDO 3 se pracuje.}).
+  \item Versant -- Komerční objektová databáze s podporou ruzných API (JDO 2.0).
+\end{itemize}
+Některé stále dostupné ale nevyvíjené implementace.
+\begin{itemize}
+  \item Ojb
+  \item Speedo
+  \item TJDO
+\end{itemize}
+
+Důvodů proč se JDO specifikace neuchytila je více. Nekteří zastávají názor, že hlavním důvodem byla nutnost upravovat bajtkód (bytecode enhancement) doménových objektů, což v době kdy JDO specifikace vznikla, nebyl zrovna osvedčený, spolehlivý a tudíž populární způsob. Dalším důvodem byla specifikace dotazovacího jazyku, který se až příliš zaměřoval na objektové databáze. Což příliš nevyhovovalo poskytovatelům relačních databází, pro které byl tento jazyk nevhodný. A jelikož tehdejší i dnešní trh se stále mnohem více točil okolo relačních databází než objektových, k velkému rozšíření JDO implementací nedošlo.
+
 \subsection{Java Persistence API}
-\cite{jpa:spec}
-\subsection{Object Data Management Group}
-\cite{odmg}
+\emph{Java Persistence API} (JPA) je odlehčený framework pro persistenci v jazyce Java, založený na POJO (Plain Old Java Objects)\cite{projpa2}.
+
+JPA specifikace (aktuální verze je 2.1\cite{jpa:spec}) patří do rodiny specifikací EJB 3, ale je definována samostatně a lze jí tudíž využít jak v Java EE tak i v Java SE. To je samozřejmě velkou výhodou oproti persistenci používané v EJB 2.
+
+Další výhodou oproti EJB 2 je celkové zjednodušení, což souvisí s možností definovat potřebná metadata nejen pomocí XML, ale lze k tomuto účelu využít i anotace. Ty jsou narozdíl od XML souboru přímo součástí zdrojového kódu, tudíž jsou přehlednější, a lze je snadněji udržovat.
+
+Narozdíl od JDO, která je starší, se JPA zaměřuje primárně na relační databáze, tedy na objektově relační mapování. Existují sice některé implementace JPA nad nerelačními databázemi, ale to je mimo rozsah specifikace JPA. Dá se tedy říct, že JDO je oproti JPA o něco rozsáhlejší specifikací, která toho umí víc. Ale i přesto se větší popularitě těší specifikace JPA.
+
+Důvodem je nejspíše fakt, že v dnešní době jsou relační databáze stále nejpoužívanějším řešením. A jak už jsem řekl, JDO sice podporuje i relační databáze, ale její API, havně dotazovací jazyk, je až příliš svázán s objektovými databázemi. Což oproti dotazovacímu jazyku použivanému v JPA, který je naopak zaměřen na relační databáze, je velká nevýhoda.
+
+Díky své popularitě má JPA hned několik implementací, a to jak komerčních tak i otevřených. Následuje seznam některých z nich.
+
+\begin{itemize}
+  \item Hibernate -- Jeden z nejpopulárnějších ORM frameworků v dnešní době, používá vlastní API, nad kterým ale existuje i JPA implementace.
+  \item DataNucleus -- Velmi zajímavé svobodné řešení, které podporuje velké množství datových úložišť, ke kterým je možno přistupovat jak přes JDO tak i přej JPA.
+  \item Batoo JPA -- Poměrně nová svobodná JPA implementace, která na svých stránkách tvrdí, že je nejrychlejší implementací JPA na světě.
+  \item OpenJPA -- Další svobodná implementace JPA, tentokrát s dílny The Apache Software Foundation.
+  \item TopLink -- Je jedno z nejstarších ORM řešení od firmy Oracle. TopLink je součástí Glassfish aplikačního serveru.
+  \item EclipseLink -- Je další velmi populární ORM framework, který je součástí Java EE serveru tomcat. Jedná se o referenční implementaci JPA. Původní kód vychází s TopLinku.
+  \item ObjectDB -- Komerční řešení, jedná se o objektovou databázi, ke které je možno přistupovat skrze JPA nebo JDO. Je to právě jeden ze zástupců, který podporuje JPA nad databází, která není relační.
+\end{itemize}
+
+\subsection{Proprietární řešení}
+Krom výše zmíněných specifikací, mají java vývojáři ještě další možnost jak řešit persistenci. Tou možností jsou produkty třetích stran, které nabízí vlastní proprietární API. Toto řešení bylo (a stále je) velmi populární. Výhodou těchto řešení je nezávislost na konkrétním procesu schvalování změn. Tím je myšleno to, že například JPA specifikace se mění jen velmi málo a jakákoliv změna znamená schvalovací proces. A ten se může někdy velmi protáhnout. Díky tomu JPA specifikace nemůže dynamicky reagovat na potřeby vývojářů.
+
+Narozdíl od toho, různé produkty třetích stran, nejsou takto omezovány. Tudíž mohou mnohem jednodušeji a rychleji přidávat potřebnou funkcionalitu. A tím se stávají mnohem atraktivnějším řešením. Ale i toto má svoji cenu. Pokud se vyvojář rozhodne použít pro persistenci produkt třetí strany a tento produkt se časem přestane vyvíjet, nebo se změní například licenční podmínky. Tak má vyvojář problém, který musí řešit, což nemusí být vždy snadné. A může to vést k potřebě přepsat část aplikace.
+
+U JPA toto nehrozí, jelikož se nejedná o konkrétní produkt, ale o specifikaci API, pro které existuje hned několk implementací. Takže v případě ukončení vývoje jedné implementace, je teoreticky (i prakticky, ale nemusí to být vždy zcela bezbolestné) možné přejít na jinou implementaci.
+
+Asi nejznámějším a nejpopulárnějším proprietárním řešením je Hibernate, který jak jsme si uvedli v části o JPA má krom svého proprietárního API podporu i pro JPA.

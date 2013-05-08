@@ -1,3 +1,75 @@
-%\input{koncepty_a_modely}
-%\input{ukladani_objektu_java}
-%\input{metodika_testovani}
+Pro účely testování výkonnu jednotlivých objektových databází a ORM frameworků jsem vytvořil jednoduchou Java aplikaci. Ta implementuje řadu testů, při kterých se ověří výkonnost CRUD operací jednotlivých řešení, při práci se stromovými strukturami. Seznam jednotlivých testů s popisem:
+\begin{itemize}
+  \item Generování stromové struktury -- V tomto testě se navytváří potřebná stromová struktura, která je pak nadále využívána dalšími testy. Zde se ověřuje rychlost zápisových operací.
+  \item Nalezení kořene -- Tento test má za úkol najít kořen (root) daného strumu v databázi. Testování rychlosti jednoduchého vyhledávání z databáze.
+  \item Aktualizování kořene -- Zde se testuje rychlost jednoduché aktualizace záznamu v databázi.
+  \item Nalezení listů -- Zde se ověřuje rychlost nalezení a načtení množiny dat s databáze. Daný test nalezne všechny koncové uzle (listy) stromu.
+  \item Přidání listů -- Kombinace operací vytváření a aktualizování záznamů. Ke každému listu přidá zadaný počet dalších uzlů.
+  \item Nalezení uzlů dle hodnoty (procházením) -- Pomocí procházení celé stromové struktury, hledá uzly s určitou hodnotou. Zde se testuje jak efektivně je spravován strom (Pozdní načítání atd.).
+  \item Nalezení uzlů dle hodnoty (dotazem) -- Zde se opět hledají uzly s danou hodnotou, ale tentokrát se místo procházení stromu využívá dotazu na databázi. testování operací vyhledávání a čtení.
+  \item Průchod stromem -- Algoritmus prochází strom podle zadané sekvence (indexy uzlů). Zde se opět testuje efektivita načítaní poduzlů.
+  \item Binární strom -- Zde je vygenerovaný strom přetransformován na binární strom, jednotlivé uzly jsou seřazeny dle jejich hodnoty vzestupně. Testování komplikovanějších aktualizačních dotazů.
+  \item Prohození potomků kořene -- Prohození levého a pravého podstromu. Ověření kvality implementace jednoduchých swap operací.
+  \item Průchod binárním stromem -- Stejné jako průchod stromem, akorát skrze binární strom.
+  \item Výpočet výšky stromu -- Zjistí výslednou výšku stromu, ověření rychlosti průchodu stromu a také částečné ověření zda všechny předchozí operace se provedli správně.
+  \item Promazání stromu -- Provede se smazání hlavního uzlu, které vyvolá kaskádovité promazání zbytku stromu. Ověření výkonu operací kaskádového mazání.
+\end{itemize}
+
+\subsubsection{Použití}
+Program se spouští bez parametrů, veškerá konfigurace se provádí pomocí konfiguračního souboru \texttt{benchmark.properties}\ref{bench4jod:prop:eg}. Následuje popis jednotlivých konfiguračních voleb a jejich hodnot.
+\begin{figure}[!h]
+\begin{lstlisting}
+bench4jod.generator.persistenceUnitName = db4o
+bench4jod.generator.variant = FIX_HEIGHT
+bench4jod.generator.numberOfChildren = 3
+bench4jod.generator.treeHeight = 7
+bench4jod.benchmark.cleanCache = false
+bench4jod.benchmark.findNodeValue = 17
+bench4jod.benchmark.findNodeDbValue = 17
+bench4jod.benchmark.explorePath = 1,2,0,0,1,2
+bench4jod.benchmark.exploreBinaryPath = 0,1,0,0,0,1,1,1,0  
+\end{lstlisting}
+\caption{Ukázka vzorového nastavení aplikace Bench4JOD}\label{bench4jod:prop:eg}
+\end{figure}
+\begin{description}
+  \item[\texttt{bench4jod.generator.persistenceUnitName}] Tato volba určuje název konfigurace, kterou chceme testovat. Jinými slovy touto volbou vybíráme poskytovatele persistence a datové úložiště použité při testu. Na výběr máme z těchto konfigurací:
+  \begin{itemize}
+     \item hb-mysql -- Kombinace Hibernate a MySQL databáze.
+     \item hb-pgsql -- Kombinace Hibernate a PostgreSQL databáze.
+     \item hb-hsql-f -- Kombinace Hibernate a HBase databáze (soubor).
+     \item hb-h2-f -- Kombinace Hibernate a H2 databáze (soubor).
+     \item elink-mysql -- Kombinace EclipseLink a MySQL databáze.
+     \item elink-pgsql -- Kombinace EclipseLink a PostgreSQL databáze.
+     \item elink-hsql-f -- Kombinace EclipseLink a HBase databáze (soubor).
+     \item elink-h2-f -- Kombinace EclipseLink a H2 databáze (soubor).
+     \item batoo-mysql -- Kombinace BatooJPA a MySQL databáze.
+     \item batoo-pgsql -- Kombinace BatooJPA a PostgreSQL databáze.
+     \item batoo-hsql-f -- Kombinace BatooJPA a HBase databáze (soubor).
+     \item batoo-h2-f -- Kombinace BatooJPA a H2 databáze (soubor).
+     \item ojpa-mysql -- Kombinace OpenJPA a MySQL databáze.
+     \item ojpa-pgsql -- Kombinace OpenJPA a PostgreSQL databáze.
+     \item ojpa-hsql-f -- Kombinace OpenJPA a HBase databáze (soubor).
+     \item ojpa-h2-f -- Kombinace OpenJPA a H2 databáze (soubor).
+     \item dn-mysql -- Kombinace DataNucleus a MySQL databáze.
+     \item dn-pgsql -- Kombinace DataNucleus a PostgreSQL databáze.
+     \item dn-hsql-f -- Kombinace DataNucleus a HBase databáze (soubor).
+     \item dn-h2-f -- Kombinace DataNucleus a H2 databáze (soubor).
+     \item orientdb -- Orient objektová databáze (vlastní API).
+     \item objectdb -- ObjectDB databáze (JPA).
+     \item db4o -- DB4O databáze (vlastní API).
+   \end{itemize}
+   \item[\texttt{bench4jod.generator.variant}] Touto volbou určujeme způsob generování stromu. Možné varianty jsou:
+   \begin{itemize}
+     \item texttt{FIX\_HEIGHT} -- Varianta při které bude vygenerovám strom, jenž bude mít výšku dle nastavené hodnoty.
+     \item texttt{FIX\_NODE\_COUNT} -- Při této variantě se neurčuje výška stromu, ale její celkový počet uzlů.
+   \end{itemize}
+   \item[\texttt{bench4jod.generator.treeHeight}] Určuje výšku stromu. Aplikuje se jen v případě varianty \texttt{FIX\_HEIGHT}.
+   \item[\texttt{bench4jod.generator.numberOfChildren}] Počet jednotlivých větví (potomků) v případě varianty \texttt{FIX\_HEIGHT}.
+   \item[\texttt{bench4jod.generator.numberOfNodes}] Udává celkový počet vygenerovaných uzlů v případě varianty \texttt{FIX\_NODE\_COUNT}.
+   \item[\texttt{bench4jod.generator.minChildren}] U varianty \texttt{FIX\_NODE\_COUNT} udává minimální počet potomků jednotlivých uzlů.
+   \item[\texttt{bench4jod.generator.maxChildren}] U varianty \texttt{FIX\_NODE\_COUNT} udává maximální počet potomků jednotlivých uzlů.
+   \item[\texttt{bench4jod.benchmark.cleanCache}] Zajišťuje zda-li se má během jednotlivých podtestů promazávat cache. Nastavit lze buď \texttt{true} nebo \texttt{false}.
+   \item[\texttt{bench4jod.benchmark.findNodeValue}] Hodnota této konfigurační volby, je použita při testu hledání uzlů s dannou hodnotou. Jedná se o variantu testu, která uzly hledá postupným procházením. Hodnotou může být libovolné celé číslo.
+   \item[\texttt{bench4jod.benchmark.findNodeDbValue}] Tato hodnota je použita pro test hledání uzlů s dannou hodnotou, ale ne pomocí procházení (jako v předchozím bodě), nýbrž pomocí dotazu.
+   \item[\texttt{bench4jod.benchmark.explorePath}] Zde se uvádí sekvence čísel oddělených čárkou, určující způsob procházení stromu. A to tak, že číslo 0 znamená prvního potomka z leva, číslo 1 znamená druhého potomka zleva a tak dále. Takže sekvence 0,1 by znamenala projít strom od keřene k jeho prvnímu potomku z leva, a od tohoto potomku přejít na jeho druhý potomek z leva.
+\end{description}
