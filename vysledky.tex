@@ -1,1 +1,11 @@
+\section{Objektové databáze}
+Když se podíváme na výsledky jednotlivých testů objektových databází (grafy na obrázcích \ref{img:oodbms1} až \ref{img:oodbms13}). Zjistíme že v sedmi testech ze třinácti, tedy ve více než v polovině případů, zvýtězila databáze ObjectDB. Což odpovídá i celkovému výsledku, kde celkový čas všech testů využívajících tuto databázi, je přibližně dva a pulkrát až čtyři a pulkrát menší než u konkurenčních produktů.
 
+Jediným testem ze zbylých šesti, kde si ObjectDB vedlo výrazněji hůře než jeho konkurence, byl test nalezení listů stromu. Důvodem je chybějící podpora některých operací v jazyce JPQL pro kolekce (v tomto případě podpora funkcí \texttt{EMPTY} a \texttt{NOT EMPTY})\footnote{Na podpoře těchto funkcí se již pracuje, a v budoucnu by se v ObjectDB měly objevit.}. Z tohoto důvodu bylo třeba kód pro nalezení listů v případě ObjectDB rozdělit na dva samostatné dotazy. Což je hlavním důvodem ztráty rychlosti.
+
+Druhou nejrychlejší objektovou databází je dle celkového grafu (obrázek \ref{img:oodbms14}) databáze DB40. Ta byla pomalejší oproti ObjectDB hlavně v testech, kde se vytvářeli nebo aktualizovali data. Co se prohledávacích (čtecích) operací týče, zde byla DB4O většinou i mírně rychlejší než ObjectDB.
+
+Nejpomalejším řešením se ukázala sada testů využívající NoSQL databázi OrientDB. Která nejvíce propadla v testu generování binárního stromu (graf \ref{img:oodbms9}) a v testu promazávání stromu (graf \ref{img:oodbms13}).
+
+
+\section{Objektově relační mapování}
