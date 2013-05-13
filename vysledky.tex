@@ -1,1 +1,28 @@
+\section{Generování stromové struktury}
+Na grafech \ref{img:oodbms1} a \ref{img:jpa1} jsou vidět výsledky jednotlivých produktů v testu generování stromové struktury, tedy rychlost jejich operací pro ukládání dat.
 
+Při pohledu na výsledky objektových databází, můžeme konstatovat, že nejrychleji data navytváří databáze ObjectDB. Ostattní dvě databáze DB4O a OrientDB jsou skoro 5x pomalejší, než jejich konkurent.
+
+Co se týče ORM produktů, zde je jasným výtězem BatooJPA, který je přibližně 2x až 4x rychlejší ve vytváření dat než jeho konkurenti. O druhou pozici se dělí produkty EclipseLink a OpenJPA. V těsném závěsu na třetím místě je Hibernate. Jako zcela nejpomalejší se ukázal nástroj DataNucleus a to na všech databázových ůložištích.
+
+Pokud bychom srovnávali objektové databáze a ORM řešení, tak zde stále platí, že nejrychlejší možností jak ukládat data je použití objektové databáze ObjectDB. Ale co se ostatních objektových databází týče, tak ty jsou, v porovnání s kombinací BatooJPA a HyperSQL, až dvakrát pomalejší.
+\section{Nalezení kořene}
+V tomto testu (výsledky na obrázku \ref{img:oodbms2}) si z objektových databází nejlépe vedlo řešení využívající DB40. Ostatní dvě řešení byli, ale jen nepatrně pomalejší a to přibližně o 40 milisekund v případě ObjectDB a 50 milisekund v případě OrientDB.
+
+V případě ORM řešení (obrázek \ref{img:jpa2}) je situace téměř opačná jako u předchozího testu. Tentokrát je nejrychlejším produktem DataNucleus následovaný produktem Hibernate a BatooJPA. A nejpomalejší nalezení kořene stromu se dosáhlo řešením využívající EclipseLink.
+
+Rychlosti objektových databází a objektově--relačního mapování jsou v tomto testu velmi podobné, ale celkově jsou řešení využívající mapovaní mírně rychlejší. Teda až na EclipseLink, který je celkově nejpomalejším řešením.  
+
+\section{Aktualizování kořene}
+
+\section{Nalezení listů}
+\section{Přidání listů}
+\section{Nalezení uzlů (procházením)}
+\section{Nalezení uzlů (dotazem)}
+\section{Průchod stromem}
+\section{Binární strom}
+\section{Prohození potomků kořene}
+\section{Průchod binárním stromem}
+\section{Výpočet výšky stromu}
+\section{Promazání stromu}
+\section{Celkový čas všech testů}
