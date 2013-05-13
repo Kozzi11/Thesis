@@ -365,6 +365,9 @@ INPUT ./obr/bench/jpa14.png
 INPUT ./obr/bench/jpa14.png
 INPUT vysledky.tex
 INPUT vysledky.tex
+INPUT obr/bench/resultf.png
+INPUT ./obr/bench/resultf.png
+INPUT ./obr/bench/resultf.png
 INPUT zaver.tex
 INPUT zaver.tex
 INPUT projekt.bbl

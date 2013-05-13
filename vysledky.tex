@@ -9,3 +9,19 @@ Nejpomalejším řešením se ukázala sada testů využívající NoSQL databá
 
 
 \section{Objektově relační mapování}
+Z výsledků na grafech \ref{img:jpa1} až \ref{img:jpa14} můžeme vyčíst hned několik informací. Jednou z informací je, který relační databázový backend byl nejrychlejší. A to je HyperSQL a H2 SQL engine. Tyto dva databázový backendy podaly ve výsledku skoro shodné výsledky v závislosti na poskytovateli ORM. Velkou roli zde hraje to, že se používali v režimu "`embedded"', tedy jako ůložiště sloužil lokální soubor, ke kterému bylo přistupováno přímo přes knihovnu a né přes síťový protokol (klient--server režim), jako tomu bylo v případě MySQL a PostgreSQL.
+
+Další informací, kterou můžeme zistit je, že v případě Hibernate a EclipseLink je MySQL backend až 2x rychlejší než PostgreSQL backend. A naopak v případě DataNucleus a OpenJPA je zase o něco málo rychlejší PostgreSQL backend než MySQL. To bych přisuzoval tomu, že EclipseLink i Hibernate jsou více vyspělé a rozšířenější implementace, které se logicky zaměřují více na optimalizace pro databázi MySQL, která je populárnější, než pro PostgreSQL.
+
+Krom informací o výkonu jednotlivých backendech, jsou z grafů patrné i informace o jednotlivých ORM řešeních. Pokud nebudu brát v potaz PostgreSQL backend, u kterého jsou největší výkyvy, a který se nepodařilo zprovoznit v kombinaci s BatooJPA. Tak nejrychlejší JPA implementací by bylo BatooJPA. Na druhém místě by následoval Hibernate. Třetí přícku by obsadil EclipseLink. A čtvrtou pozici by obdržela implementace OpenJPA. Nejhorší výkon předvedla platforma DataNucleus.
+
+\section{Srovnání OODBMS a ORM}
+V předchozích odstavcích jsem porovnal zvlášť objektové databáze a zvlášť řešení na bázi ORM. Samozřejmě je zajímavé i porovnání mezi výkonem ORM řešení a objektovými databázemi. Ale aby toto porovnání mělo význam, je třeba vzít v úvahu, že všechny tři testované objektové databáze komunikovali s databází přímo na úrovni souborového systému. Tudíž nemé velký smysl, porovnávat jejich výkon například s ORM řešením bežícím nad MySQL databází v režimu klient server, kde je třeba brát v potaz režii spojenou s komunikačním protokolem a komunikací po síti celkově.
+
+Proto se v následujícím textu omezím jen na porovnání objektových databází s ORM řešeními, které přistupují k datů, také přímo přes souborový systém, tedy na databáze HyperSQL a H2 SQL.
+
+Výsledné porovnání těchto databází můžete vidět na obrázku \ref{img:resultf}.
+\begin{figure}[!h]
+  \includegraphics[]{obr/bench/resultf}
+  \caption{Generování stromové struktury [ms]}\label{img:resultf}
+\end{figure}
