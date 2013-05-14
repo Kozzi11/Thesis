@@ -20,7 +20,9 @@ V předchozích odstavcích jsem porovnal zvlášť objektové databáze a zvlá
 
 Proto se v následujícím textu omezím jen na porovnání objektových databází s ORM řešeními, které přistupují k datů, také přímo přes souborový systém, tedy na databáze HyperSQL a H2 SQL.
 
-Výsledné porovnání těchto databází můžete vidět na obrázku \ref{img:resultf}.
+Výsledné porovnání těchto databází můžete vidět na obrázku \ref{img:resultf} (zelená -- ORM, červená -- OODBMS). Z tohoto grafu vidíme, že celkově nejrychlejším řešením je použití objektové databáze ObjectDB, která je stále minimálně 2x rychlejší, než kterékoliv jiné řešení.
+
+Co se týče ostatních objektových databází, tak zde je výkon podobný jako u objektově relačního mapování.
 \begin{figure}[!h]
   \includegraphics[]{obr/bench/resultf}
   \caption{Generování stromové struktury [ms]}\label{img:resultf}

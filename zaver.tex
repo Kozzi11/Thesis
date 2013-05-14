@@ -1,1 +1,27 @@
+Mým cílem v této práci bylo seznámit čtenáře s problematikou persistence objektů a jejich stavů v OOP jazycích, zejména v programovacím jazyce Java. Ale i přes zaměření na tento programovací jazyk, jsou informace uvedené v této práci platné z velké části i pro ostatní OOP jazyky. Toto platí zejména pro první dvě teoretické kapitoly.
 
+Ve zbylých kapitolách jsem se více zaměřil na popis jazyka Javy a jednotlivých nástrojů a specifikací, jenž jsou v tomto jazyce využívány pro persistenci dat.
+
+Během psaní této práce, jsem si rozšířil svoje znalosti o hodně zajímavých informací. A během implementace podpůrného programu, jenž jsem využil pro testování výkonu jednotlivých nástrojů, jsem narazil na několik zajímavých problémů. A to zejména na fakt, že specifikace je jedna věc, ale implementace je věc druhá.
+
+Ačkoliv všechny mnou testované ORM nástroje by měli splňovat JPA specifikaci, jen málo kdy se podařilo napsat kód využívající JPA API tak, aby běžel ve všech mnou testovaných implementacích.
+
+Asi nejméně problematickými nástroji byly v tomto směru Hibernate a EclipseLink. Největší potíže jsem měl s DataNucleus, u kterého se mi jeden test nepodařilo implementovat vůbec.
+
+Docela zábavná byla i situace, kdy jedna implementace (BatooJPA) měla prohozený význam funkcí \texttt{EMPTY} a \texttt{NOT EMPTY}. Což na můj popud bylo vyvojáři rychle opraveno, ale bohužel jen částečně. Sice opravili toto chování v kódu, ale při snaze skompilovat opravenou verzi, to zhavarovalo na jednotkových testech, kde se stále počítalo se špatným chováním těchto funkcí.
+
+Naštěstí se jedná o otevřený software, jenž má svůj kód dostupný na githubu, takže nebyl problém si vytvořit fork repositáře a opravit rozbité testy. Na můj požadavek začlenit tuto opravu bylo zareagováno opravdu rychle. To hodnotím velmi pozitivně. Dokonce jsem během testování narazil i na pár dalších chyb, které jsem touto cestou odstranil. Takže bylo nakonec možné tuto implementaci zařadit do mého testování, teda až na vyjímku PostgreSQL databáze, s touto databází se mi testy nepodařilo provést a na nalezení a opravení chyby mi již nezbyl čas.
+
+Další zajímavý problém jsem měl s OpenJPA implementací. Zde se sice nejednalo o problém nesouladu specifikace a implementace, ale o výkonnostní potíže při určitém typu operací. To některé mé testy degradovalo natolik, že jejich provedení trvalo místo obvyklích pár vteřin i několik desítek minut. Naštěstí pár dní před odevzdáním této práce vyšla aktualizovaná verze této implementace. Kde se již naštěstí tento problém nevyskytoval, takže výsledky uvedené v páté kapitole nejsou tímto nijak poznamenány.
+
+Porovnání jednotlivých nástrojů bylo zaměřeno na jejich výkon, tedy na rychlost jednotlivých operací. Což je jeden z nejzákladnějších a nejzajímavějších faktorů při volbě daného nástroje. Na druhou stranu zde existuje prostor pro rozšíření práce o měření dalších faktorů. A to zejména měření nárkoů na systémové prostředky jako je procesor, operační paměť nebo velikost zabraného místa na disku.
+
+Jelikož veškeré testy jsem prováděl s výchozím nastavením jednotlivých nástrojů. Je zde i možnost zaměřit se na optimalizaci nastavení jednotlivých nástrojů a databází. Ale rozsah tohoto téma by vydal na samostatnou práci. 
+
+%Ve čtvrté kapitole jsem se snažil čtenáře seznámit s programovacím jazykem Java a popsat mu %některé techniky a vlastnosti jazyka, jenž jsou používané různými nástroji pro podporu persistence objektů. 
+
+%Dále jsem v téže kapitole popsal existující nástroje a specifikace, které ve světě jazyka Java existují a řeší problémy persistence dat či objketů, objektově relační mapování, transakční zpracování a mnoho dalších souvisejících ůloh.
+
+%V posledních dvou kapitolách jsem se zaměřil na výkonnostní testování některých existujících nástrojů pro persistenci objektů. Tyto nástroje jsem rozdělil do dvou skupin. Kde první skupinou byly objektové databáze a druhou skupinou byly nástroje mapující objekty na relační databáze.
+
+%Tyto jednotlivé nástroje a databáze jsem otestoval pomocí mnou napsané aplikace, která testovala výkonost jednotlivých řešení pomocí sady testů. Výsledky těchto testů jsem následně 
