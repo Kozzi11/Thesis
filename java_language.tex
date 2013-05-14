@@ -1,20 +1,20 @@
 Je třídně založený, objektově orientovaný a víceúlohový obecný programovací jazyk, který byl vyvinut firmou Sun Microsystems. Ta jej v roce 2007 uvolnila pod svobodnou licencí GNU GPL. V dnešní době je jazyk vyvíjen zejména firmou Oracle Corporation Inc., která firmu Sun Microsystems odkoupila.
 
-Syntaxe Javy je odvozena z jazyků C a C++, kterým je díky tomu v mnoha ohledech podobná. Ale narozdíl od těchto jazyků se zbavila konstrukcí, které často vedli k (bezpečnostním) chybám. Jedná se hlavně o konstrukce umožňující přímou práci s pamětí (ukazatele), o příkaz goto a také o beznaménkové datové typy. Díky tomu, a silné typové kontrole, jsou programy méně náchylné na bezpečnostní chyby.
+Syntaxe Javy je odvozena z jazyků C a C++, kterým je díky tomu v mnoha ohledech podobná. Ale na rozdíl od těchto jazyků se zbavila konstrukcí, které často vedli k (bezpečnostním) chybám. Jedná se hlavně o konstrukce umožňující přímou práci s pamětí (ukazatele), o příkaz goto a také o bez znaménkové datové typy. Díky tomu, a silné typové kontrole, jsou programy méně náchylné na bezpečnostní chyby.
 
 Ruční správu paměti zde nahrazuje automatická správa. Tu zajišťuje garbage collector, což je proces vyhledávající (sbírající) již nedostupnou alokovanou paměť (odpad), kterou následně uvolní, aby mohla být znovu použita.
 
-Další, včem se Java od jazyka C a C++ odlišuje, je to, že se výsledný program nekompiluje přímo na instrukční sadu dané architektury, ale do mezijazyka tzv. bytekódu (soubory s příponou \texttt{.class}). Ty jsou teprve následně "`interpretovány"' pomocí JVM (\emph{\textbf{J}ava \textbf{V}irtual \textbf{M}achine}).
+Další, včem se Java od jazyka C a C++ odlišuje, je to, že se výsledný program nekompiluje přímo na instrukční sadu dané architektury, ale do mezijazyka tzv. "`bajt kódu"' (soubory s příponou \texttt{.class}). Ty jsou teprve následně "`interpretovány"' pomocí JVM (\emph{\textbf{J}ava \textbf{V}irtual \textbf{M}achine}).
 
 Automatická správa paměti a interpretovaný běh vedl, zejména v historii, k pomalejšímu běhu výsledné aplikace. Pomalost způsobená garbage collectorem, se postupně ,s vynalézáním lepších a rychlejších algoritmů, podařila minimalizovat.
 
 Výkonnostní problém, související s interpretací, vylepšila technika zvaná JIT (\emph{Just-in-Time}) kompilace (kompilace v době běhu). Jedná se o techniku, která dle statistiky kompiluje vhodné části kódu přímo do instrukční sady daného stroje. Tyto části kódu se při opakovaném použití znovu neinterpretují, ale jsou provedeny přímo.
 
-Výhoda JIT kompilace se projeví nejvíce u déle běžících aplikací, kde se vykonává stejný kód dokola. Proto, a kvůli nutnosti načíst celý JVM při startu aplikace, je použití jazyka Java na malé a krátce běžící aplikce nevhodné a neefektivní.
+Výhoda JIT kompilace se projeví nejvíce u déle běžících aplikací, kde se vykonává stejný kód dokola. Proto, a kvůli nutnosti načíst celý JVM při startu aplikace, je použití jazyka Java na malé a krátce běžící aplikace nevhodné a neefektivní.
 
 \subsection{Reflexe a introspekce}
 Jednou ze zajímavých vlastností jazyka Java je reflexe. Ta umožňuje prozkoumávat a modifikovat strukturu a chování (například proměnné, atributy, metadata a funkce) objektu přímo za běhu \ref{code:java:reflection}.
-To je velmi užitečné zejména pro různe frameworky a reflexe se také hojně využíva při metaprogramování. 
+To je velmi užitečné zejména pro různé frameworky a reflexe se také hojně využívá při metaprogramování. 
 \begin{figure}[!h]
 \begin{lstlisting}
 public class User {
@@ -36,9 +36,9 @@ public class User {
 \label{code:java:reflection}
 \end{figure}
 
-Jedná se o pokročilou vlastnost jazyka, jenž umožňuje provádět operace, které by jinak nebylo možné provádět. Umožňuje obejití zapouzdření (zpřístupňuje privátné členy) a nese tedy riziko narušení správného běhu programu. Díky tomu, a kvůli nemalé režii navíc, by měla být reflexe používána co nejméně a jen lidmi s dostatečnými znalostmi.
+Jedná se o pokročilou vlastnost jazyka, jenž umožňuje provádět operace, které by jinak nebylo možné provádět. Umožňuje obejití zapouzdření (zpřístupňuje privátní členy) a nese tedy riziko narušení správného běhu programu. Díky tomu, a kvůli nemalé režii navíc, by měla být reflexe používána co nejméně a jen lidmi s dostatečnými znalostmi.
 
-Introspekce využíva relexe a umožňuje získání informací o objektu, jako je například seznam všech funkcí, atributů, implementovaných rozhraní nebo název třídy \ref{code:java:introspection}.
+Introspekce využívá reflexe a umožňuje získání informací o objektu, jako je například seznam všech funkcí, atributů, implementovaných rozhraní nebo název třídy \ref{code:java:introspection}.
 \begin{figure}[!h]
 \begin{lstlisting}
 String someObject = "Some text";
@@ -49,9 +49,9 @@ System.out.println(someObject.getClass().getName());
 \label{code:java:introspection}
 \end{figure}
 \subsection{Bytecode enhancement}
-Podobné možnosti jako reflexe nám nabízí i bytecode enhancement. Jedná se o process, při kterém se přímo modifukuje výsledný "`bajtkód"' (obsah souboru s příponou \texttt{.class}), a který se narozdíl od reflexe neprovádí stále dokola v každém běhu, ale pouze jen jednou, a to buď po kompilaci nebo při prvním načtení třídy.
+Podobné možnosti jako reflexe nám nabízí i bytecode enhancement. Jedná se o proces, při kterém se přímo modifikuje výsledný "`bajt kód"' (obsah souboru s příponou \texttt{.class}), a který se na rozdíl od reflexe neprovádí stále dokola v každém běhu, ale pouze jen jednou, a to buď po kompilaci nebo při prvním načtení třídy.
 
-Z toho vyplývá hlavní výhoda oproti reflexi, kterou je rychlost a celkově malá režie navíc. Nadruhou stranu je implementace složitější a náročnejší, než je v případě reflexe.
+Z toho vyplývá hlavní výhoda oproti reflexi, kterou je rychlost a celkově malá režie navíc. Na druhou stranu je implementace složitější a náročnější, než je v případě reflexe.
 
 Existuje několik knihoven (frameworků), které umožňují a usnadňují bytecode enhancement. Mezi nejznámější patří tyto tři:
 \begin{itemize}
@@ -68,7 +68,7 @@ Samotné anotace nijak přímo neovlivňují činnost kódu, který je nimi anot
 \begin{itemize}
   \item Dodatečné informace pro kompilátor -- Kompilátor může využít informací z anotací k detekci či potlačení chyb.
   \item Zpracování v době kompilace či nasazení -- Nástroje mohou zpracovávat anotace a využít je ke generování například XML souborů a podobně.
-  \item Zpracování v době běhu (runtime) -- Některé anotace mohou být zprístupněny a využity přímo v době běhu samotné aplikace.
+  \item Zpracování v době běhu (runtime) -- Některé anotace mohou být zpřístupněny a využity přímo v době běhu samotné aplikace.
 \end{itemize}
 
 Jazyk Java poskytuje několik vestavěných anotací, které se dají rozdělit do dvou skupin. Na anotace aplikované na kód a na anotace aplikované na jiné anotace.
@@ -83,16 +83,16 @@ Jazyk Java poskytuje několik vestavěných anotací, které se dají rozdělit 
   \end{itemize} 
   \item[Anotace aplikované na jiné anotace] (meta anotace)\hfill
   \begin{itemize}
-    \item \texttt{@Retention} -- Určuje způsob uložení anotace. Zda bude pouze součástí kódu, nebo se skompiluje do výsledného \texttt{.class} soboru a nebo bude dostupná za běhu skrze reflexi.
+    \item \texttt{@Retention} -- Určuje způsob uložení anotace. Zda bude pouze součástí kódu, nebo se skompiluje do výsledného \texttt{.class} souboru a nebo bude dostupná za běhu skrze reflexi.
     \item \texttt{@Documented} -- Využívá se pro zahrnutí anotace do dokumentace.
     \item \texttt{@Target} -- Omezuje rozsah platnosti, na co může být anotace aplikována (třída, metoda \ldots).
     \item \texttt{@Inherited} -- Anotace se dědí do odvozených tříd.
-    \item \texttt{@Repeatable} -- Anotaci je možno na jeden element aplikovat vícekrát (např. s rúznými parametry). Tato anotace je součástí Javy 8 SE.
+    \item \texttt{@Repeatable} -- Anotaci je možno na jeden element aplikovat vícekrát (např. s různými parametry). Tato anotace je součástí Javy 8 SE.
   \end{itemize}
 \end{description}
 
 Použití anotací je snadné, stačí jen požadovanou anotací uvést--napsat před prvek, který chceme anotovat. Anotovat můžeme například třídy, metody, proměnné, parametry nebo balíčky.
-Na ukázce kódu \ref{code:ann:bultin} vydíme základní použití vestavěnné anotace.
+Na ukázce kódu \ref{code:ann:bultin} vidíme základní použití vestavěné anotace.
 \begin{figure}[!h]
 \begin{lstlisting}
 public class Shape {
@@ -119,7 +119,7 @@ public class Square extends Shape {
     }
 }
 \end{lstlisting}
-\caption{Ukázka použití vestavěnné anotace \texttt{@Override}.}
+\caption{Ukázka použití vestavěné anotace \texttt{@Override}.}
 \label{code:ann:bultin}
 \end{figure}
 

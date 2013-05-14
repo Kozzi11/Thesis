@@ -1,4 +1,4 @@
-V předchozí kapitole jsem vás seznámil, s některými typy SŘDB a s jejich datovými modely, jenž používají pro uchovávání dat. V této kapitole vám popíši některé základní techniky, používané těmito SŘBD pro ukládání celých objektů programu.
+V předchozí kapitole jsem vás seznámil s některými typy SŘDB a s jejich datovými modely, jenž používají pro uchovávání dat. V této kapitole vám popíši některé základní techniky, používané těmito SŘBD pro ukládání celých objektů programu.
 
 \section{Serializace}
 Serializace (někdy se můžeme setkat i s pojmem \emph{marshalling}\footnote{Slova serializace a marshalling jsou často brána jako synonyma, ale například v případě jazyka Java se jedná o dvě odlišné operace.\cite{rfc:2713}}) je nejprimitivnějším způsobem, jak v aplikaci umožnit persistenci (uložení do souboru, databáze či jakéhokoliv jiného umístění) nebo přenos (např. po síti) určitého objektu.
@@ -12,14 +12,14 @@ Jedná se o proces, při němž jsou data instance objektu (datové struktury), 
 
 Dále je také vhodné, aby byl formát pokud možno co nejkompaktnější (menší přenos dat po síti a menší obsazený prostor v paměti).
 
-Často používanými formáty pro serializaci jsou XML a JSON. Pro kompaktnost se někdy můžeme setkat i s jejich binarními variantami s binarním XML (EXI \cite{w3c:exi}, EBML \cite{rfc:ebml}) a s binárním JSON-em (BSON \cite{bson:spec}). Dalším populárním formátem primárně určeném pro serializaci je \textbf{YAML} \cite{rfc:yaml} (\emph{\textbf{Y}AML \textbf{A}in’t \textbf{M}arkup \textbf{L}anguage}, dříve používán název \emph{Yet Another Markup Language}).
+Často používanými formáty pro serializaci jsou XML a JSON. Pro kompaktnost se někdy můžeme setkat i s jejich binárními variantami s binárním XML (EXI \cite{w3c:exi}, EBML \cite{rfc:ebml}) a s binárním JSON-em (BSON \cite{bson:spec}). Dalším populárním formátem primárně určeném pro serializaci je \textbf{YAML} \cite{rfc:yaml} (\emph{\textbf{Y}AML \textbf{A}in’t \textbf{M}arkup \textbf{L}anguage}, dříve používán název \emph{Yet Another Markup Language}).
 
 Při serializaci/deserializaci je třeba řešit také problém referencí na jiné objekty. To se řeší pomocí tzv. swizzlingu (přeskládávání \cite{wiki:swizz}).
 
 \section{Objektově relační mapovaní}
-Další technikou, používanou pro ukládání objektů do databáze, je objektově relační mapovaní (\emph{object-relational mapping} -- \textbf{ORM}). Tato technika se, v dnešní době, stává čím dál rozšířenější a populárnější.
+Další technikou, používanou pro ukládání objektů do databáze, je objektově relační mapovaní (\emph{object-relational mapping} -- \textbf{ORM}). Tato technika se v dnešní době stává čím dál rozšířenější a populárnější.
 
-Jak je z názvu patrné, jedná se o techniku, která objektový model aplikace napsané v OOP jazyce (například Java) mapuje na relační model databáze. Většinou se mapování provádí tak, že jedné třídě odpovídá jedna tabulka v relační databázi a pro jednotlivé skalární atributy objektu jsou v dané tabulce vytvořeny sloupce. Jeden řádek této tabulky pak obvykle odpovídá instanci třídy (objektu) v programu. Jednotlivé vztahy mezi objekty se modelují buď pomocí cizích klíčů \ref{fig:orm:fk}, nebo pomocí vazebních tabulek \ref{fig:orm:bt}.
+Jak je z názvu patrné, jedná se o techniku, která objektový model aplikace napsané v OOP jazyce, například Java, mapuje na relační model databáze. Většinou se mapování provádí tak, že jedné třídě odpovídá jedna tabulka v relační databázi a pro jednotlivé skalární atributy objektu jsou v dané tabulce vytvořeny sloupce. Jeden řádek této tabulky pak obvykle odpovídá instanci třídy (objektu) v programu. Jednotlivé vztahy mezi objekty se modelují buď pomocí cizích klíčů \ref{fig:orm:fk}, nebo pomocí vazebních tabulek \ref{fig:orm:bt}.
 
 \begin{figure}[!h]
 \begin{subfigure}[b]{0.45\textwidth}
@@ -165,30 +165,30 @@ public class Address {
 \caption{Mapování pomocí vazební tabulky}\label{fig:orm:bt}
 \end{figure}
 
-Další věcí, o kterou se ORM stará, je mapování operací, prováděných nad objektem, na SQL dotazy. To znamená, že když například změním na objektu typu \texttt{User} atribut \texttt{name}, tak se mi napozadí vygeneruje SQL dotaz pro aktualizaci sloupce \texttt{name} pro daného uživatele. Krom mapování operací změn zajišťuje ORM i způsob jak data z relační databáze získávat, například pomocí hodnot některých sloupců.
+Další věcí, o kterou se ORM stará, je mapování operací prováděných nad objektem, na SQL dotazy. To znamená, že když například změním na objektu typu \texttt{User} atribut \texttt{name}, tak se mi na pozadí vygeneruje SQL dotaz pro aktualizaci sloupce \texttt{name} pro daného uživatele. Krom mapování operací změn zajišťuje ORM i způsob jak data z relační databáze získávat, například pomocí hodnot některých sloupců.
 \subsection{Výhody a nevýhody}
-Hlavní výhodou ORM a důvodem proč se těší oblibě, je možnost objektového přístupu k datům uložených v relačních databázích, které jsou stále nejrozšířenejším typem SŘBD. K datům uloženým v relačních databázích je možné přistupovat z různých programovacích jazyků, tudíž je možné použít techniku ORM v libovolném OOP jazyce.
+Hlavní výhodou ORM a důvodem proč se těší oblibě, je možnost objektového přístupu k datům uložených v relačních databázích, které jsou stále nejrozšířenějším typem SŘBD. K datům uloženým v relačních databázích je možné přistupovat z různých programovacích jazyků, tudíž je možné použít techniku ORM v libovolném OOP jazyce.
 
-Krom výhod má ORM i dvě nevýhody. První nevýhoda je výkonnost určitých operací jako je změna hodnoty atributu na stejnou hodnotu u skupiny objektů. Takováto operace, v případě využití ORM, by se provedla tak, že by se nejdříve načetly všechny objekty splňující určitou podmínku. Následně by se všem temto objektům nastavila hodnota zvoleného atributu na danou hodnotu. A poté by se pro každý objekt provedl aktualizační SQL dotaz. Tento přístup by v případě miliónů objektů mohl znamenat jeden dotaz na načtení a miliónu dotazů na aktualizaci záznamu v databázi, nehledě na paměťové nároky takovéto operace. Naproti tomu v případě použití nativního SQL dotazu, by se provedl jen jeden dotaz, který by nevytvářel žádne objekty, a vše by se provedlo přímo na databázi. Proto se ORM často kombinuje právě přímo s voláním nativních dotazů nad databází.
+Krom výhod má ORM i dvě nevýhody. První nevýhoda je výkonnost určitých operací, jako je změna hodnoty atributu na stejnou hodnotu u skupiny objektů. Takováto operace, v případě využití ORM, by se provedla tak, že by se nejdříve načetly všechny objekty splňující určitou podmínku. Následně by se všem těmto objektům nastavila hodnota zvoleného atributu na danou hodnotu. A poté by se pro každý objekt provedl aktualizační SQL dotaz. Tento přístup by v případě miliónů objektů mohl znamenat jeden dotaz na načtení a milión dotazů na aktualizaci záznamů v databázi, nehledě na paměťové nároky takovéto operace. Naproti tomu v případě použití nativního SQL dotazu, by se provedl jen jeden dotaz, který by nevytvářel žádné objekty, a vše by se provedlo přímo na databázi. Proto se ORM často kombinuje právě přímo s voláním nativních dotazů nad databází.
 
 Druhou nevýhodou je režie vznikající při mapování operací na jednotlivé SQL dotazy. Ta není sice úplně malá, ale díky výhodám, které ORM přináší se dá ve velkém množství případů akceptovat. Nehledě na to, že s rostoucím výpočetním výkonem počítačů a programovacích jazyků, bude tato režie čím dál méně patrná.
 
 \section{Nativní podpora persistence v OOP jazyku}
 Poslední technikou ukládání objektů, kterou zde budu popisovat, je podpora persistence přímo v programovacím jazyce neboli podpora pro objektově orientované databáze. Tu zajišťuje určité rozšíření (často ve formě knihovny), které poskytuje rozhraní pro práci s daným OOSŘBD.
 
-Tato technika, narozdíl od předchozích, využívá stejný datový model jak pro program, tak i pro data v databázi. To eliminuje potřebu konverze z jednoho datového modelu na druhý, což má za následek vyšší efektivnost a nižší režii, než například použití techniky ORM. Použití této techniky je tedy ideální pro složité datové struktury a vazby.
+Tato technika, na rozdíl od předchozích, využívá stejný datový model jak pro program, tak i pro data v databázi. To eliminuje potřebu konverze z jednoho datového modelu na druhý, což má za následek vyšší efektivnost a nižší režii, než například použití techniky ORM. Použití této techniky je tedy ideální pro složité datové struktury a vazby.
 
 \subsection{Persistence objektu}
 OOP jazyky standardně podporují konstrukce pro definici typu objektu a pro jeho vytvoření. Ale takovéto objekty jsou pouze transientní (dočasné) a zmizí jakmile se program ukončí.
 
-Aby objekty zůstaly persistentní (nezmizely po ukončení programu), musí být jazyk rozšířen o konstrukce, které toto zajistí. Způsobů jak označit učité objekty jako persistentní existuje několik.
+Aby objekty zůstaly persistentní (nezmizely po ukončení programu), musí být jazyk rozšířen o konstrukce, které toto zajistí. Způsobů, jak označit určité objekty jako persistentní, existuje několik.
 \begin{itemize}
-  \item \textbf{Persistence dle třídy} (\emph{Persistence by class}). Je nejjednoduší způsob, jak odlišit persistentní a transientní objekty. A to tak, že jakýkoliv objekt persistentní třídy je persistentní a naopak, jakýkoliv objekt nepersistentní třídy je transientní.
+  \item \textbf{Persistence dle třídy} (\emph{Persistence by class}). Je nejjednodušší způsob, jak odlišit persistentní a transientní objekty. A to tak, že jakýkoliv objekt persistentní třídy je persistentní a naopak, jakýkoliv objekt nepersistentní třídy je transientní.
   
   Tento přístup není ideální, protože neumožňuje mít persistentní i transientní objekty stejného typy, což je velmi omezující.
-  \item \textbf{Persistence vytvořením} (\emph{Persistence by creation}). Častějším přístupem, jak vytvořit persistentní objekt, je rozšíření konstrukce pro vytváření transientního objektu. Takže v závislosti na způsobu vytvoření objektu, může být objekt persistentní nebo transientní.
+  \item \textbf{Persistence vytvořením} (\emph{Persistence by creation}). Častějším přístupem, jak vytvořit persistentní objekt, je rozšíření konstrukce pro vytváření transientního objektu. Takže, v závislosti na způsobu vytvoření objektu, může být objekt persistentní nebo transientní.
   \item \textbf{Persistence označením} (\emph{Persistence by marking}). Jedná se o podobný přístup jako v předchozím případě. S tím rozdílem, že rozhodnutí, zda-li bude objekt persistentní, je určeno explicitně po jeho vytvoření kdykoliv během běhu programu.
-  \item \textbf{Persistence dostupností} (\emph{Persistence by reachability}). Zde se persistence dosahuje také expilicitním určením. A to označením jednoho či více objektů jako (kořenový) persistentní objekt. Kde veškeré objekty, jenž jsou dostupné s takhle označeného objektu, jsou taktéž persistentní. Neboli pokud máme persistentní kořenový objekt \texttt{A}, který obsahuje referenci na objekt \texttt{B} a součásti objektu \texttt{B} jsou reference na objekty \texttt{C} a \texttt{D}. Tak potom objekty \texttt{B}, \texttt{C} a \texttt{D} jsou také persistentní.
+  \item \textbf{Persistence dostupností} (\emph{Persistence by reachability}). Zde se persistence dosahuje také explicitním určením. A to označením jednoho či více objektů jako (kořenový) persistentní objekt. Kde veškeré objekty, jenž jsou dostupné s takhle označeného objektu, jsou taktéž persistentní. Neboli pokud máme persistentní kořenový objekt \texttt{A}, který obsahuje referenci na objekt \texttt{B} a součásti objektu \texttt{B} jsou reference na objekty \texttt{C} a \texttt{D}. Tak potom objekty \texttt{B}, \texttt{C} a \texttt{D} jsou také persistentní.
 \end{itemize}
 
 \subsection{Identita objektu a ukazatele}
@@ -197,6 +197,6 @@ V objektově orientovaných jazycích má každý transientní objekt svoji iden
 U persistentních objektů je nutné, aby jejich identita zůstala stejná i po ukončení programu. K tomu účelu existují tzv. "`persistentní ukazatele"' nebo-li \textbf{oid} (\textit{\textbf{o}bject \textbf{id}entificator}). Tyto ukazatele nejsou závislé na pozici objektu v paměti či na místě uložení na disku. Dá se na ně nahlížet, jako na ukazatele do databáze a pracovat s nimi stejně, jak s normálními ukazateli do paměti.
 
 \subsection{Uložení a získáni persistentních objektů}
-Při ukládání objektu do objektové databáze je možné uložit buď celý objekt i s jeho metodami a definicí třídy, nebo do databáze uložit pouze data objektu a kód uložit zvlášt do souboru. Druhý přístup je, díky jednoduchosti (není například třeba integrovat kompilátor), častější.
+Při ukládání objektu do objektové databáze je možné uložit buď celý objekt i s jeho metodami a definicí třídy, nebo do databáze uložit pouze data objektu a kód uložit zvlášť do souboru. Druhý přístup je, díky jednoduchosti (není například třeba integrovat kompilátor), častější.
 
 Možností, jak získávat uložené objekty s databáze, je několik. Pojmenovat si objekty, jako by to byly například názvy souborů, je jedna z cest. To se dá využít při práci s relativně malým množství objektů. Pro větší množství objektů je výhodnější použít jejich oid, ty mohou být uloženy externě. Třetím způsobem je uložení objektů do kolekcí a v programu procházením této kolekce vyhledat požadovaný objekt. 

@@ -1,11 +1,11 @@
-Testování bude probíhat pokaždé na stejné hardwarové i softwarové konfiguraci (viz. podkapitola testovací sestava). Aby se zabránilo zkreslení výsledků, budou během testování spušteny jen nejnutnější aplikace potřebné pro běh testu. Pokud nebude uvedeno jinak, tak jsou veškeré nástroje, databázové systémy a podobně v defaultní konfiguraci. Tím je myšleno, že v případě jakýhkoliv optimalizací určitého programu, budou tyto změny u daného testu uvedeny.
+Testování bude probíhat pokaždé na stejné hardwarové i softwarové konfiguraci (viz. podkapitola testovací sestava). Aby se zabránilo zkreslení výsledků, budou během testování spuštěny jen nejnutnější aplikace potřebné pro běh testu. Pokud nebude uvedeno jinak, tak jsou veškeré nástroje, databázové systémy a podobně ve výchozí konfiguraci. Tím je myšleno, že v případě jakéhokoliv optimalizací určitého programu, budou tyto změny u daného testu uvedeny.
 
 Samotné měření bude probíhat následovně:
 \begin{enumerate}
   \item Zvolení konfigurace (testu), kterou chceme testovat.
   \item Příprava konfigurace aplikace pro daný test.
   \item Příprava potřebných nástrojů (nastartování databáze atd.).
-  \item Promazání systémových cache pamětí (\texttt{echo 3 > /proc/sys/vm/drop\_caches}).\label{mt:p}
+  \item Promazání systémových dočasných pamětí (\texttt{echo 3 > /proc/sys/vm/drop\_caches}).\label{mt:p}
   \item Spuštění vybraného testu.
   \item Zapsání výsledků testu.
   \item Pokud máme tři výsledky a jejich standardní odchylka je menší jak $10\,\%$ nebo máme výsledků pět, tak test ukončíme a jako výsledek určíme aritmetický průměr všech naměřených hodnot. V opačném případě se vracíme na bod \ref{mt:p}.
